@@ -1,31 +1,117 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@using Microsoft.AspNet.Identity
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<html>
+<head>
+    <title>Free LeoImages Website Template | Home :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/hover_pack.js"></script>
+</head>
+<body>
+    <div class="index-banner">
+        <div class="wmuSlider example1">
+            <article style="position: absolute; width: 100%; opacity: 0;">
+                <div class="banner-wrap">
+                    <div class="cont span_2_of_3">
+                        <h1>Photos, illustrations by<br> Creatives all over the world.</h1>
+                        <div class="search_box">
+                            <form>
+                                <input type="text" value="People Walking" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'People Walking';}"><input type="submit" value="">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article style="position: absolute; width: 100%; opacity: 0;">
+                <div class="banner-wrap">
+                    <div class="cont span_2_of_3">
+                        <h1>Photos, illustrations by<br> Creatives all over the world.</h1>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <script src="~/Scripts/jquery.wmuSlider.js"></script>
+        <script>
+       				     $('.example1').wmuSlider();
+        </script>
+    </div>
+    <div class="main">
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="content-top">
+                <div class="section1">
+                    <div class="cont1 span_2_of_about">
+                        <h3 class="m_1"><a>Create a free account now</a></h3>
+                    </div>
+                    <div class="rsidebar span_1_of_about">
+                        <a href="~/Account/Register"><div class="btn">Register now</div></a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        }
+        <div class="content-bottom">
+            <h2 class="m_2">Browse by Category</h2>
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_5 span_1_of_5">
+                        <ul class="list1">
+                            <li><a href="abstract.html">Abstract</a></li>
+                            <li><a href="abstract.html">Animals/Wildlife</a></li>
+                            <li><a href="abstract.html">The Arts</a></li>
+                            <li><a href="abstract.html">Backgrounds/Textures</a></li>
+                            <li><a href="abstract.html">Beauty/Fashion</a></li>
+                            <li><a href="abstract.html">Buildings/Landmarks</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <ul class="list1">
+                            <li><a href="abstract.html">Business/Finance</a></li>
+                            <li><a href="abstract.html">Celebrities</a></li>
+                            <li><a href="abstract.html">Editorial</a></li>
+                            <li><a href="abstract.html">Education</a></li>
+                            <li><a href="abstract.html">Food and Drink</a></li>
+                            <li><a href="abstract.html">Healthcare/Medical</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <ul class="list1">
+                            <li><a href="abstract.html">Holidays</a></li>
+                            <li><a href="abstract.html">Illustrations/Clip-Art</a></li>
+                            <li><a href="abstract.html">Industrial</a></li>
+                            <li><a href="abstract.html">Interiors</a></li>
+                            <li><a href="abstract.html">Miscellaneous</a></li>
+                            <li><a href="abstract.html">Model Released Only</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <ul class="list1">
+                            <li><a href="abstract.html">Nature</a></li>
+                            <li><a href="abstract.html">Objects</a></li>
+                            <li><a href="abstract.html">Parks/Outdoor</a></li>
+                            <li><a href="abstract.html">People</a></li>
+                            <li><a href="abstract.html">Religion</a></li>
+                            <li><a href="abstract.html">Science</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <ul class="list1">
+                            <li><a href="abstract.html">Signs/Symbols</a></li>
+                            <li><a href="abstract.html">Sports/Recreation</a></li>
+                            <li><a href="abstract.html">Technology</a></li>
+                            <li><a href="abstract.html">Transportation</a></li>
+                            <li><a href="abstract.html">Vectors</a></li>
+                            <li><a href="abstract.html">Vintage</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</body>
+</html>

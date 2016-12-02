@@ -163,7 +163,7 @@ namespace PhotoGallery.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home"); // goes to accountHomePage
                 }
                 AddErrors(result);
             }
@@ -392,6 +392,7 @@ namespace PhotoGallery.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            System.Diagnostics.Debug.WriteLine("LogOff action result !!");
             return RedirectToAction("Index", "Home");
         }
 

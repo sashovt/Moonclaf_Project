@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace PhotoGallery.Models
 {
@@ -112,4 +115,6 @@ namespace PhotoGallery.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+   
 }

@@ -13,7 +13,19 @@ namespace PhotoGallery.Controllers
         {
             var db = new ApplicationDbContext();
             var photo = db.Photos.OrderByDescending(p => p.DateAdded).Take(3);
+            ViewBag.Message = "Home";
             return View(photo.ToList());
         }
+        public ActionResult About()
+        {
+            ViewBag.Message = "About";
+            return View();
+        }
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Contact";
+            return View();
+        }
+
     }
 }

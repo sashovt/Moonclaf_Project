@@ -1,41 +1,213 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/hover_pack.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <div class="index-banner">
+        <div class="header-top">
+            <div class="wrap">
+                <div class="logo">
+                    <a href="~/Home/Index"><img src="~/Images/logo.png" alt="" /></a>
+                </div>
+                <div class="menu">
+                    <a href="#" class="right_bt" id="activator"><img src="~/Images/nav_icon.png" alt=""></a>
+                    <div class="box" id="box">
+                        <div class="box_content_center">
+                            <div class="menu_box_list">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    if (ViewBag.Message == "Gallery")
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul>
+                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">Post Image</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+                                    }
+                                    else if (ViewBag.Message == "PostImage")
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul>
+                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+                                    }
+                                    else if (ViewBag.Message == "Contact")
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul>
+                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">Post Image</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+                                    }
+                                    else if (ViewBag.Message == "About")
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul>
+                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">Post Image</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+                                    }
+                                    else if (ViewBag.Message == "Home")
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul>
+                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">Post Image</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+
+                                    }
+                                    else if (ViewBag.Message == User.Identity.GetUserName())
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <ul>
+                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">Post Image</a></li>
+                                                <li><a href="">About</a></li>
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                                            </ul>
+                                        }
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (ViewBag.Message == "Gallery")
+                                    {
+                                        <ul>
+                                            <li><a href="~/Account/Login">Login</a></li>
+                                            <li><a href="~/Home/About">About</a></li>
+                                            <li><a href="">Contact</a></li>
+                                        </ul>
+                                    }
+                                    else if (ViewBag.Message == "Home")
+                                    {
+                                        <ul>
+                                            <li><a href="~/Account/Login">Login</a></li>
+                                            <li><a href="">Gallery</a></li>
+                                            <li><a href="~/Home/About">About</a></li>
+                                            <li><a href="">Contact</a></li>
+                                        </ul>
+                                    }
+                                    else if (ViewBag.Message == "Contact")
+                                    {
+                                        <ul>
+                                            <li><a href="~/Account/Login">Login</a></li>
+                                            <li><a href="">Gallery</a></li>
+                                            <li><a href="~/Home/About">About</a></li>
+                                        </ul>
+                                    }
+                                    else if (ViewBag.Message == "About")
+                                    {
+                                        <ul>
+                                            <li><a href="~/Account/Login">Login</a></li>
+                                            <li><a href="">Gallery</a></li>
+                                            <li><a href="">Contact</a></li>
+                                        </ul>
+                                    }
+                                    else if (ViewBag.Message == "Login")
+                                    {
+                                        <ul>
+                                            <li><a href="">Register</a></li>
+                                            <li><a href="">Gallery</a></li>
+                                            <li><a href="~/Home/About">About</a></li>
+                                            <li><a href="">Contact</a></li>
+                                        </ul>
+                                    }
+                                    <!--
+                                         <ul>
+                                        <li><a href="~/Account/Login">Login</a></li>
+                                        <li><a href="">Gallery</a></li>
+                                        <li><a href="">About</a></li>
+                                        <li><a href="">Contact</a></li>
+                                    </ul>
+                                        -->
+
+
+                                }
+                            </div>
+                            <a class="boxclose" id="boxclose"><img src="~/Images/close.png" alt=""></a>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                                var $ = jQuery.noConflict();
+									$(function() {
+										$('#activator').click(function(){
+												$('#box').animate({'top':'0px'},500);
+                                    });
+										$('#boxclose').click(function(){
+												$('#box').animate({'top':'-700px'},500);
+										});
+									});
+									$(document).ready(function(){
+
+									//Hide (Collapse) the toggle containers on load
+									$(".toggle_container").hide();
+
+									//Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+									$(".trigger").click(function(){
+										$(this).toggleClass("active").next().slideToggle("slow");
+										return false; //Prevent the browser jump to the link anchor
+									});
+
+									});
+                    </script>
+                </div>
+                <div class="clear"></div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

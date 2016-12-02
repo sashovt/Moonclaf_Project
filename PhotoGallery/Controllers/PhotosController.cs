@@ -18,6 +18,7 @@ namespace PhotoGallery.Controllers
         public ActionResult Index()
         {
             return View(db.Photos.ToList());
+
         }
 
         // GET: Photos/Details/5
