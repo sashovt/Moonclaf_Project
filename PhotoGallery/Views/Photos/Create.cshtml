@@ -1,56 +1,68 @@
 ﻿@model PhotoGallery.Models.Photo
 
-@{
-    ViewBag.Title = "Create";
-}
+<html>
+<head>
+    <style type="text/css">
+        #createBox {
+            margin-left: 35%;
+            margin-right: 50%;
+            width: 700px;
+        }
+    </style>
+    <title>Upload Photo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/hover_pack.js"></script>
 
-<h2>Create</h2>
+</head>
+<body>
+    <br />
+    @using (Html.BeginForm("Create", "Photos", FormMethod.Post ,new { EncType = "multipart/form-data" , id = "createBox"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Add Photo</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
 
+            <div class="form-group" id="dateTime">
+                @Html.LabelFor(model => model.DateAdded, "Date Added: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", dissabled = "disabled" } })
+                </div>
+            </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Photo</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input style="margin-left: 10px; margin-top: 5px;" type="file"  name="file" id="file"/> 
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="padding-top: 20px">
+                    <input type="submit" value="Upload" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
+</body>
+</html>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateAdded, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
+<script type="text/javascript">
+    $(function () { $('#dateTime :input').attr("disabled", true); });
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

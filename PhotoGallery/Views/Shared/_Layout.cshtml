@@ -34,7 +34,7 @@
 
                                             <ul>
                                                 <li><a href="">@User.Identity.GetUserName()</a></li>
-                                                <li><a href="">Post Image</a></li>
+                                                <li>@Html.ActionLink("Post Image" , "Create" , "Photos", null,null)</li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
@@ -96,7 +96,7 @@
                                             <ul>
                                                 <li><a href="">@User.Identity.GetUserName()</a></li>
                                                 <li><a href="">Gallery</a></li>
-                                                <li><a href="">Post Image</a></li>
+                                                <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
