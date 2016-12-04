@@ -39,6 +39,7 @@ namespace PhotoGallery.Controllers
         }
 
         // GET: Photos/Create
+        [Authorize]
         public ActionResult Create()
         {
             Photo photo = new Photo();
@@ -50,21 +51,32 @@ namespace PhotoGallery.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo,HttpPostedFileBase file)
         {
             ViewBag.Message = "PostImage";
             if (ModelState.IsValid)
             {
-                db.Photos.Add(photo);
-                db.SaveChanges();
+                photo.Author = db.Users.FirstOrDefault(u => u.FullName == User.Identity.Name);
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
+
+            if(file!=null)
+            {
+                photo.Image = new byte[file.ContentLength];
+                file.InputStream.Read(photo.Image, 0, file.ContentLength);
+            }
+            db.Photos.Add(photo);
+            db.SaveChanges();
+
             return View(photo);
         }
 
         // GET: Photos/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +95,7 @@ namespace PhotoGallery.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo)
         {
@@ -97,6 +110,7 @@ namespace PhotoGallery.Controllers
         }
 
         // GET: Photos/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +126,7 @@ namespace PhotoGallery.Controllers
         }
 
         // POST: Photos/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
