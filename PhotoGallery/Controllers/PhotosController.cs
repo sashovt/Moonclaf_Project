@@ -7,17 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PhotoGallery.Models;
-
+using System.Drawing;
+using System.IO;
 namespace PhotoGallery.Controllers
 {
     public class PhotosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+     
 
         // GET: Photos
         public ActionResult Index()
         {
             return View(db.Photos.ToList());
+
         }
 
         // GET: Photos/Details/5
@@ -39,6 +42,7 @@ namespace PhotoGallery.Controllers
         public ActionResult Create()
         {
             Photo photo = new Photo();
+            ViewBag.Message = "PostImage";
             return View(photo);
         }
 
@@ -49,15 +53,14 @@ namespace PhotoGallery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo)
         {
+            ViewBag.Message = "PostImage";
             if (ModelState.IsValid)
             {
                 db.Photos.Add(photo);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-
-
             return View(photo);
         }
 
@@ -85,6 +88,7 @@ namespace PhotoGallery.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -118,6 +122,7 @@ namespace PhotoGallery.Controllers
             return RedirectToAction("Index");
         }
 
+    
         protected override void Dispose(bool disposing)
         {
             if (disposing)
