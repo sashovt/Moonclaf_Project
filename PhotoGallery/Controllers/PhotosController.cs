@@ -19,9 +19,11 @@ namespace PhotoGallery.Controllers
         // GET: Photos
         public ActionResult Index()
         {
+            ViewBag.Message = "Gallery";
             return View(db.Photos.ToList());
 
         }
+
 
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
@@ -150,7 +152,9 @@ namespace PhotoGallery.Controllers
             {
                 return HttpNotFound();
             }
-            return View(photo);
+            List<Photo> pass = new List<Photo>();
+            pass.Add(photo);
+            return View(pass);
         }
 
         protected override void Dispose(bool disposing)
