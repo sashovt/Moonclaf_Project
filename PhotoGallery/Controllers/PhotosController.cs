@@ -104,7 +104,7 @@ namespace PhotoGallery.Controllers
 
                 db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("MyGallery");
+                return RedirectToAction("MyGallery", "Photos");
             }
             return View(photo);
         }
@@ -134,28 +134,16 @@ namespace PhotoGallery.Controllers
             Photo photo = db.Photos.Find(id);
             db.Photos.Remove(photo);
             db.SaveChanges();
-            return RedirectToAction("MyGallery");
+            return RedirectToAction("MyGallery", "Photos");
         }
 
-        // GET: Photos/МyGallery/5
-        public ActionResult MyGallery(int? id)
+        // GET: Photos/MyGallery
+        [Authorize]
+        public ActionResult MyGallery()
         {
             ViewBag.Message = "MyGallery";
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Photo photo = db.Photos.Find(id);
-            if (photo == null)
-            {
-                return HttpNotFound();
-            }
-            List<Photo> pass = new List<Photo>();
-            pass.Add(photo);
-            return View(pass);
+            return View(db.Photos.Where(u => u.Author.Id == User.Identity).ToList());
         }
-
-     
 
         protected override void Dispose(bool disposing)
         {
