@@ -19,10 +19,16 @@ namespace PhotoGallery.Controllers
         // GET: Photos/Gallery
         public ActionResult Gallery()
         {
-            ViewBag.Message = "Gallery";         
-            return View(db.Photos.ToList());
-        }
+            ViewBag.Message = "Gallery";    
+            using (db)
+            {
+                var photos = db.Photos
+                    .Include(a => a.Author)
+                    .ToList();
 
+                return View(photos);
+            }  
+        }
 
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
@@ -142,7 +148,7 @@ namespace PhotoGallery.Controllers
         public ActionResult MyGallery()
         {
             ViewBag.Message = "MyGallery";
-            return View(db.Photos.Where(u => u.Author.Id == User.Identity).ToList());
+            return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
         }
 
         protected override void Dispose(bool disposing)

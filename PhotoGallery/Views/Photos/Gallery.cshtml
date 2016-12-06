@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<PhotoGallery.Models.Photo>
+
+@{ 
+    ViewBag.Title = "Gallery";
+}
 <html>
 <head>
 
@@ -59,7 +63,7 @@
                                             <a>
                                                 <img src="@imgsrc" alt="" width="600" height="400">
                                             </a>
-                                            <div class="desc">Add a description of the image here</div>
+                                            <div class="desc">@photo.Author.FullName</div>
                                         </div>
                                     </div>
                                 }

@@ -5,20 +5,20 @@
 }
 <html>
 <head>
-    <title>Free LeoImages Website Template | Home :: w3layouts</title>
+    <title>Gallery : Register</title>
     <style type="text/css">
-        #loginForm {
+        #registerBox {
             margin-left: 35%;
             margin-right: 50%;
-            width: 500px;
+            width: 600px;
         }
     </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/hover_pack.js"></script>
-
 </head>
 <body>
 
@@ -27,7 +27,7 @@
             <div class="wrap">
                     <h4 class="title">Login</h4>
                     <hr />
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id="registerBox" }))
             {
 
                         @Html.AntiForgeryToken()
