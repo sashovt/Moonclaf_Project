@@ -16,12 +16,11 @@ namespace PhotoGallery.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
      
 
-        // GET: Photos
-        public ActionResult Index()
+        // GET: Photos/Gallery
+        public ActionResult Gallery()
         {
-            ViewBag.Message = "Gallery";
+            ViewBag.Message = "Gallery";         
             return View(db.Photos.ToList());
-
         }
 
 
@@ -55,26 +54,25 @@ namespace PhotoGallery.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] Photo photo,HttpPostedFileBase file)
         {
             ViewBag.Message = "PostImage";
-            if (ModelState.IsValid)
-            {
-                photo.Author = db.Users.FirstOrDefault(u => u.FullName == User.Identity.Name);
-
-                //return RedirectToAction("Index");
-            }
-
-            if(file!=null)
+            if (file != null)
             {
                 photo.Image = new byte[file.ContentLength];
                 file.InputStream.Read(photo.Image, 0, file.ContentLength);
             }
+            photo.Author = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
+            if (ModelState.IsValid)
+            { 
+                //return RedirectToAction("Index");
+            }
+
+          
             db.Photos.Add(photo);
             db.SaveChanges();
 
-            return View(photo);
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Photos/Edit/5
@@ -156,6 +154,8 @@ namespace PhotoGallery.Controllers
             pass.Add(photo);
             return View(pass);
         }
+
+     
 
         protected override void Dispose(bool disposing)
         {

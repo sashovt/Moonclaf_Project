@@ -8,6 +8,7 @@ namespace PhotoGallery.Models
 {
     public class Photo
     {
+
         public Photo()
         {
             this.DateAdded = DateTime.Now;
@@ -18,7 +19,7 @@ namespace PhotoGallery.Models
 
         [StringLength(200)]
         public string Title { get; set; }
-
+       
         [Required]
         public byte[] Image { get; set; }
 

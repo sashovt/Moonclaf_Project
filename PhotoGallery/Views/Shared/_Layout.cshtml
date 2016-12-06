@@ -33,7 +33,7 @@
                                             @Html.AntiForgeryToken()
 
                                             <ul>
-                                                <li><a href="">@User.Identity.GetUserName()</a></li>
+                                                <li><a href="">My Gallery</a></li>
                                                 <li>@Html.ActionLink("Post Image" , "Create" , "Photos", null,null)</li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
@@ -48,8 +48,8 @@
                                             @Html.AntiForgeryToken()
 
                                             <ul>
-                                                <li><a href="">@User.Identity.GetUserName()</a></li>
-                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">My Gallery</a></li>
+                                                <li>@Html.ActionLink("Gallery","Gallery","Photos",null,null)</li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
@@ -63,8 +63,8 @@
                                             @Html.AntiForgeryToken()
 
                                             <ul>
-                                                <li><a href="">@User.Identity.GetUserName()</a></li>
-                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">My Gallery</a></li>
+                                                <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                 <li><a href="">Post Image</a></li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
@@ -78,8 +78,8 @@
                                             @Html.AntiForgeryToken()
 
                                             <ul>
-                                                <li><a href="">@User.Identity.GetUserName()</a></li>
-                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">My Gallery</a></li>
+                                                <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                 <li><a href="">Post Image</a></li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
@@ -94,10 +94,9 @@
                                             @Html.AntiForgeryToken()
 
                                             <ul>
-                                                <li><a href="">@User.Identity.GetUserName()</a></li>
-                                                <li><a href="">Gallery</a></li>
+                                                <li><a href="">My Gallery</a></li>
+                                                <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                 <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos",null,null)</li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
@@ -105,13 +104,13 @@
                                         }
 
                                     }
-                                    else if (ViewBag.Message == User.Identity.GetUserName())
+                                    else if (ViewBag.Message == "MyGallery")
                                     {
                                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                         {
                                             @Html.AntiForgeryToken()
                                             <ul>
-                                                <li><a href="">Gallery</a></li>
+                                                <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null);</li>
                                                 <li><a href="">Post Image</a></li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="">Contact</a></li>
@@ -135,7 +134,7 @@
                                     {
                                         <ul>
                                             <li><a href="~/Account/Login">Login</a></li>
-                                            <li><a href="">Gallery</a></li>
+                                            <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
                                             <li><a href="">Contact</a></li>
                                         </ul>
@@ -144,7 +143,7 @@
                                     {
                                         <ul>
                                             <li><a href="~/Account/Login">Login</a></li>
-                                            <li><a href="">Gallery</a></li>
+                                            <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
                                         </ul>
                                     }
@@ -152,7 +151,7 @@
                                     {
                                         <ul>
                                             <li><a href="~/Account/Login">Login</a></li>
-                                            <li><a href="">Gallery</a></li>
+                                            <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="">Contact</a></li>
                                         </ul>
                                     }
@@ -160,7 +159,7 @@
                                     {
                                         <ul>
                                             <li><a href="">Register</a></li>
-                                            <li><a href="">Gallery</a></li>
+                                            <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
                                             <li><a href="">Contact</a></li>
                                         </ul>
