@@ -1,0 +1,82 @@
+﻿@model IEnumerable<PhotoGallery.Models.Photo>
+<html>
+<head>
+
+    <title>Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.js" type="text/javascript"></script>
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" text="text/css"/>
+    <link href="~/Content/CustomStyle.css" rel="stylesheet" text="text/cs" />
+
+    <script>
+			$(document).ready(function() {
+				$('.popup-with-zoom-anim').magnificPopup({
+					type: 'inline',
+					fixedContentPos: false,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					closeBtnInside: true,
+					preloader: false,
+					midClick: true,
+					removalDelay: 300,
+					mainClass: 'my-mfp-zoom-in'
+			});
+		});
+    </script>
+
+
+
+
+
+</head>
+<body>
+    <div class="wrap">
+        <div class="abstract">
+            <ul class="breadcrumb breadcrumb__t">Gallery</ul>
+        </div>
+        <div class="container">
+            <div class="row">
+
+                @foreach (var photo in Model)
+            {
+                        <div class="col-sm-3">
+                            <h4>
+                                @photo.Title
+                            </h4>
+                            <div>
+                                @if (photo.Image != null)
+                                {
+                                    var base64 = Convert.ToBase64String(photo.Image);
+                                    var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
+
+                                    <div class="responsive">
+                                        <div class="img">
+                                            <a>
+                                                <img src="@imgsrc" alt="" width="600" height="400">
+                                            </a>
+                                            <div class="desc">Add a description of the image here</div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
+                                }
+                               
+                                <br/>
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
