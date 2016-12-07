@@ -8,6 +8,10 @@ namespace PhotoGallery.Models
 {
     public class Photo
     {
+        //public bool IsAuthor(string name)
+            //{
+            //return this.Author.Email.Equals(name);
+            //}
 
         public Photo()
         {

@@ -90,6 +90,12 @@ namespace PhotoGallery.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Photo photo = db.Photos.Find(id);
+
+            //if (!IsUserAuthorizedToEdit(photo))
+            //{
+               // return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            //}
+
             if (photo == null)
             {
                 return HttpNotFound();
@@ -103,16 +109,22 @@ namespace PhotoGallery.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Image,DateAdded")] Photo photo)
+        public ActionResult Edit(Photo model)
         {
-            if (ModelState.IsValid)
-            {
+                using (var database = new ApplicationDbContext())
+                {
+                    var photo = database.Photos
+                        .FirstOrDefault(p => p.Id == model.Id);
 
-                db.Entry(photo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("MyGallery", "Photos");
-            }
-            return View(photo);
+                    photo.Title = model.Title;
+                    DateTime currentDate=DateTime.Now;
+                    photo.DateAdded = currentDate;
+
+                    database.Entry(photo).State = EntityState.Modified;
+                    database.SaveChanges();
+
+                    return RedirectToAction("MyGallery", "Photos");
+                }
         }
 
         // GET: Photos/Delete/5
@@ -124,6 +136,12 @@ namespace PhotoGallery.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Photo photo = db.Photos.Find(id);
+
+            //if (!IsUserAuthorizedToEdit(photo))
+            //{
+                //return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            //}
+
             if (photo == null)
             {
                 return HttpNotFound();
@@ -159,5 +177,11 @@ namespace PhotoGallery.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //private bool IsUserAuthorizedToEdit(Photo photo)
+        //{
+            //bool isAuthor = photo.IsAuthor(this.User.Identity.Name);
+            //return isAuthor;
+        //}
     }
 }

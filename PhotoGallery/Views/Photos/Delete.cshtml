@@ -63,7 +63,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.DateAdded, "Date Added: ", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", dissabled = "disabled" } })
+                                @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
                             </div>
                         </div>
 
