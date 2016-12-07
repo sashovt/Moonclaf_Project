@@ -97,7 +97,7 @@
                                                 <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
                                                 <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                 <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                <li><a href="~/Home/About.cshtml">About</a></li>
+                                                <li>@Html.ActionLink("About", "About", "Home", null,null)</li>
                                                 <li><a href="~/Home/Contact.cshtml">Contact</a></li>
                                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                             </ul>
@@ -135,7 +135,7 @@
                                         <ul>
                                             <li><a href="~/Account/Login">Login</a></li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                            <li><a href="~/Home/About">About</a></li>
+                                            <li>@Html.ActionLink("About", "About", "Home", null, null)</li>
                                             <li><a href="~/Home/Contact">Contact</a></li>
                                         </ul>
                                     }
