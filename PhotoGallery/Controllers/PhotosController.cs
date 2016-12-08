@@ -49,9 +49,16 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            Photo photo = new Photo();
             ViewBag.Message = "PostImage";
-            return View(photo);
+            using (var database = new ApplicationDbContext())
+            {
+                Photo photo = new Photo();
+                photo.Categories = database.Categories
+                    .OrderBy(c => c.Name)
+                    .ToList();
+
+                return View(photo);
+            }   
         }
 
         // POST: Photos/Create

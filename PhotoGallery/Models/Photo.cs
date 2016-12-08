@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -18,6 +19,14 @@ namespace PhotoGallery.Models
             this.DateAdded = DateTime.Now;
         }
 
+        public Photo(string authorId,string title,byte[] image,int categoryId)
+        {
+            this.Author.Id = authorId;
+            this.Title = title;
+            this.Image = image;
+            this.CategoryId = categoryId;
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -32,6 +41,9 @@ namespace PhotoGallery.Models
 
         public ApplicationUser Author { get; set; }
 
+        public int CategoryId { get; set; }
+
+        public ICollection<Category> Categories { get; set; }
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using PhotoGallery.Models;
 using PhotoGallery.Migrations;
+using PhotoGallery.Models;
 using System.Data.Entity;
 
 [assembly: OwinStartupAttribute(typeof(PhotoGallery.Startup))]
