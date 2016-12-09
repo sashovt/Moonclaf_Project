@@ -205,6 +205,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\BannerModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,8 +214,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\HelperStyle.css" />
     <Content Include="Content\magnific-popup.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -226,10 +229,12 @@
     <Content Include="Images\banner1.jpg" />
     <Content Include="Images\close.png" />
     <Content Include="Images\comments.png" />
+    <Content Include="Images\Cute-Camera-Wallpaper.jpg" />
     <Content Include="Images\date.png" />
     <Content Include="Images\heart.png" />
     <Content Include="Images\img-sprite.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\moonclaf_logo2.png" />
     <Content Include="Images\nav_icon.png" />
     <Content Include="Images\p_close.png" />
     <Content Include="Images\quotes.png" />
@@ -245,6 +250,12 @@
     <Content Include="Images\img-sprite.psd" />
     <Content Include="Images\logo.psd" />
     <Content Include="Images\nav_icon.psd" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hover_pack.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -252,15 +263,22 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.magnific-popup.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.poptrox.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.wmuSlider.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\skel.min.js" />
+    <Content Include="Scripts\util.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Temp\detail1.html" />
+    <Content Include="Temp\detail2.html" />
+    <Content Include="Temp\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -301,6 +319,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Photos\MyGallery.cshtml" />
+    <Content Include="Views\Photos\ResultGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

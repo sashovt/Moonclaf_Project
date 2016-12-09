@@ -41,7 +41,7 @@ body{
 	-ms-transition:all .2s linear;
 }
 .header-top{
-	background:rgba(105, 210, 236, 0.51);
+	background:rgba(150, 133, 143,0.51);
 }
 .menu{
 	float:right;
@@ -151,15 +151,16 @@ a.boxclose{
 	margin:0 auto;
 	padding:10% 0 12% 0;
 }
-.index-banner{
-	background: url(../images/banner.jpg) no-repeat center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	background-position:center;
-	background-size: 100% 100%;
+.index-banner {
+    background: url(../images/Cute-Camera-Wallpaper.jpg) no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
 }
+
 .wmuSlider {
 	position: relative;
 	overflow: hidden;
@@ -411,15 +412,16 @@ h4.title {
 	letter-spacing: -1px;
 	text-transform: uppercase;
 }
+/*here is the navbar color*/
 .box_content_center1{
-	background:#8FCDDC;
+	background:rgba(150, 133, 143,0.81)
 }
 .menu_box_list1{
 	display: inline-block;
 	padding:2% 0;
 }
 .menu_box_list1 li a {
-	color: #FFF;
+	color: #fff;
 	font-size:1em;
 	display: block;
 	margin: 0.3em;

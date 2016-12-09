@@ -1,58 +1,53 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity;
 
 <html>
 <head>
-    <title>Free LeoImages Website Template | Home :: w3layouts</title>
+    <title>Home</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet">
     <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/hover_pack.js"></script>
+
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
-    <div class="index-banner">
+
+    <div class="index-banner" style="background-image:url(../../Images/Cute-Camera-Wallpaper.jpg)">
         <div class="wmuSlider example1">
             <article style="position: absolute; width: 100%; opacity: 0;">
                 <div class="banner-wrap">
                     <div class="cont span_2_of_3">
-                        <h1>Photos, illustrations by<br> Creatives all over the world.</h1>
-                        <div class="search_box">
-                            <form>
-                                <input type="text" value="People Walking" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'People Walking';}"><input type="submit" value="">
-                            </form>
-                        </div>
+                        <h1 style="font-family: 'Ultra',serif">Welcome to Moonclaf Image Gallery.<br />Enjoy your stay.</h1>
                     </div>
                 </div>
             </article>
             <article style="position: absolute; width: 100%; opacity: 0;">
                 <div class="banner-wrap">
                     <div class="cont span_2_of_3">
-                        <h1>Photos, illustrations by<br> Creatives all over the world.</h1>
+                        <h1 style="font-family: 'Ultra',serif">Photos, illustrations by<br> Creatives all over the world.</h1>
+                        <div class="search_box">
+                            @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                            {
+                                <input type="text" name="title_user" value="Search for image/user" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for image/user';}"><input type="submit" value="">
+                            }
+                        </div>
                     </div>
                 </div>
             </article>
         </div>
         <script src="~/Scripts/jquery.wmuSlider.js"></script>
         <script>
-       				     $('.example1').wmuSlider();
+            $('.example1').wmuSlider();
         </script>
     </div>
+
     <div class="main">
-        @if (!Request.IsAuthenticated)
-        {
-            <div class="content-top">
-                <div class="section1">
-                    <div class="cont1 span_2_of_about">
-                        <h3 class="m_1"><a>Create a free account now</a></h3>
-                    </div>
-                    <div class="rsidebar span_1_of_about">
-                        <a href="~/Account/Register"><div class="btn">Register now</div></a>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        }
         <div class="content-bottom">
             <h2 class="m_2">Browse by Category</h2>
             <div class="wrap">
@@ -112,6 +107,7 @@
             </div>
         </div>
     </div>
+
 
 </body>
 </html>

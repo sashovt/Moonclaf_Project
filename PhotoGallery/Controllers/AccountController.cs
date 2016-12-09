@@ -58,6 +58,7 @@ namespace PhotoGallery.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Message = "Login";
             return View();
         }
 
@@ -139,6 +140,7 @@ namespace PhotoGallery.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Message = "Register";
             return View();
         }
 

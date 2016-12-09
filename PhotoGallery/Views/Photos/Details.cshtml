@@ -1,42 +1,63 @@
 ﻿@model PhotoGallery.Models.Photo
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
+<html>
+<head>
+    <title>Details</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/Content/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
 
-<div>
-    <h4>Photo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+</head>
+<body>
+        <div>
+            @if (Model.Image != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Image);
+                var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
+                <div style="position:absolute">
+                    <a><img style="height:auto; width:auto;" src="@imgsrc" alt="" /></a>
+                </div>
+            }
+            else
+            {
+                <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
+            }
+        </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <a href="#" class="info fa fa-info-circle"><span>About</span></a>
+        <div class="inner">
+            <div class="content">
+                <h3>@Model.Title</h3>
+                <p>Uploaded on: @Model.DateAdded.DayOfWeek.ToString()  @Model.DateAdded.Date.ToString("dd-MM-yyy") <br/>By  <br />In category: </p>
+            </div>
+            <div class="copyright">
+                <h3>Follow us</h3>
+                <ul class="icons">
+                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                </ul>
+                &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
+            </div>
+        </div>
+    </footer>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <!-- Scripts -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/skel.min.js"></script>
+    <script src="~/Scripts/util.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateAdded)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

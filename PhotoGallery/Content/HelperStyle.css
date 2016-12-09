@@ -1,0 +1,10 @@
+﻿body {
+    
+}
+.backgroundColor{
+    background-color: #d5d5d5;
+}
+.center {
+    display: block;
+    margin: 0 auto;
+}
