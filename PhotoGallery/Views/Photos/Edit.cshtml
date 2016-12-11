@@ -62,10 +62,17 @@
                             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10" style="margin-left: 150px; margin-top: -25px;">
                                 @if (Model.Image != null)
+<<<<<<< HEAD
                                 {
                                     var base64 = Convert.ToBase64String(Model.Image);
                                     var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
                                     <img src="@imgsrc" style="width: 320px; height:200px;" />
+=======
+                {
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
+                                    <img src="@imgsrc" style="width: 265px; height:265px;" />
+>>>>>>> 1245cf809a1263c5626fbb23fe26cad8a6535df1
                                 }
                                 else
                                 {
@@ -76,8 +83,13 @@
 
                         <div class="form-group" style="margin-top:30px">
                             @Html.LabelFor(model => model.DateAdded, "Date Added: ", htmlAttributes: new { @class = "control-label col-md-2" })
+<<<<<<< HEAD
                             <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
                                 @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+=======
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+>>>>>>> 1245cf809a1263c5626fbb23fe26cad8a6535df1
                             </div>
                         </div>
 
