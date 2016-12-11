@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<PhotoGallery.Models.Photo>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -15,22 +16,8 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css"/>
 </head>
-<body class="backgroundColor">
 
-    <!-- Header -->
-    <header id="header">
-        <div class="inner">
-            <div class="content">
-                <h1>Moonclaf</h1>
-                <h2>
-                    A fully responsive <br />
-                    portfolio gallery.
-                </h2>
-                <a href="#" class="button big alt"><span>Explore</span></a>
-            </div>
-            <a href="#" class="button hidden"><span>Explore</span></a>
-        </div>
-    </header>
+<body class="backgroundColor">
 
     <!-- Main -->
     <div id="main">
@@ -39,6 +26,7 @@
 
                 @foreach (var photo in Model)
                 {
+
                     <div>
                         @if (photo.Image != null)
                         {
@@ -53,10 +41,8 @@
                             <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
                         }
                     </div>
-
-
                 }
-
+             
             </div>
         </div>
     </div>
@@ -73,7 +59,7 @@
                 <h3>Follow us</h3>
                 <ul class="icons">
                     <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
                     <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
                     <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
                 </ul>

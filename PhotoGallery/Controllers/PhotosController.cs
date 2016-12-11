@@ -46,6 +46,7 @@ namespace PhotoGallery.Controllers
         public ActionResult Details(int? id)
         {
             ViewBag.Message = "Other";
+          
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -55,6 +56,7 @@ namespace PhotoGallery.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(photo);
         }
 
@@ -64,6 +66,7 @@ namespace PhotoGallery.Controllers
         {
             Photo photo = new Photo();
             ViewBag.Message = "PostImage";
+          
             return View(photo);
         }
 
@@ -78,14 +81,15 @@ namespace PhotoGallery.Controllers
             ViewBag.Message = "PostImage";
             if (file != null)
             {
-                photo.Image = new byte[file.ContentLength];
+               photo.Image = new byte[file.ContentLength];
                 file.InputStream.Read(photo.Image, 0, file.ContentLength);
             }
+
             photo.Author = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
-      
+
             db.Photos.Add(photo);
             db.SaveChanges();
-
+            
             return RedirectToAction("MyGallery","Photos");
         }
 

@@ -14,31 +14,68 @@
     <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
+    <style>
+        .details {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin: 0 auto;
+            height: auto;
+            width: auto;
+        }
 
+        .backButton {
+          
+            position: absolute;
+            top: 15px;
+            left: 3px;
+            width: 70px;
+            height: 30px;
+            opacity:0.30;
+        }
+        .backButton:hover {
+            opacity:1; 
+            transition: 0.3s;
+           
+        }
+
+    </style>
 </head>
-<body>
-        <div>
-            @if (Model.Image != null)
+<body class="backgroundColor">
+
+    <div style="position:relative;">
+        <div class="backButton">
+            <button class="btn btn-sm btn-default" style="background-color:#6d7993; " type="button"
+                    onclick="JavaScript: window.history.back(1); return false;">
+                <span> 	&laquo; Back</span>
+            </button>
+
+        </div>
+        @if (Model.Image != null)
             {
                 var base64 = Convert.ToBase64String(Model.Image);
                 var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
-                <div style="position:absolute">
-                    <a><img style="height:auto; width:auto;" src="@imgsrc" alt="" /></a>
-                </div>
-            }
-            else
-            {
-                <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
-            }
-        </div>
+            <div style="background-color: #9099A2;">
+                <a><img class="details" src="@imgsrc" alt="" /></a>
+            </div>
+        }
+        else
+        {
+            <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
+        }
+    </div>
     <!-- Footer -->
     <footer id="footer">
         <a href="#" class="info fa fa-info-circle"><span>About</span></a>
         <div class="inner">
             <div class="content">
                 <h3>@Model.Title</h3>
-                <p>Uploaded on: @Model.DateAdded.DayOfWeek.ToString()  @Model.DateAdded.Date.ToString("dd-MM-yyy") <br/>By  <br />In category: </p>
+                <p>Uploaded on: @Model.DateAdded.DayOfWeek.ToString()  @Model.DateAdded.Date.ToString("dd-MM-yyy") <br />By <span title=@ViewBag.Email>@ViewBag.User</span> <br />In category: </p>
+
+
             </div>
+
+
             <div class="copyright">
                 <h3>Follow us</h3>
                 <ul class="icons">
@@ -59,5 +96,3 @@
     <script src="~/Scripts/main.js"></script>
 </body>
 </html>
-
-
