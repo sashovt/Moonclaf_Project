@@ -106,11 +106,7 @@ namespace PhotoGallery.Controllers
 
             //if (!IsUserAuthorizedToEdit(photo))
             //{
-<<<<<<< HEAD
-            // return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-=======
-               // return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
->>>>>>> 1245cf809a1263c5626fbb23fe26cad8a6535df1
+
             //}
 
             if (photo == null)
@@ -128,23 +124,10 @@ namespace PhotoGallery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Photo model)
         {
-<<<<<<< HEAD
+
             ViewBag.Message = "Other";
-            using (var database = new ApplicationDbContext())
-            {
-                var photo = database.Photos
-                    .FirstOrDefault(p => p.Id == model.Id);
+         
 
-                photo.Title = model.Title;
-                DateTime currentDate = DateTime.Now;
-                photo.DateAdded = currentDate;
-
-                database.Entry(photo).State = EntityState.Modified;
-                database.SaveChanges();
-
-                return RedirectToAction("MyGallery", "Photos");
-            }
-=======
                 using (var database = new ApplicationDbContext())
                 {
                     var photo = database.Photos
@@ -159,7 +142,7 @@ namespace PhotoGallery.Controllers
 
                     return RedirectToAction("MyGallery", "Photos");
                 }
->>>>>>> 1245cf809a1263c5626fbb23fe26cad8a6535df1
+
         }
 
         // GET: Photos/Delete/5
