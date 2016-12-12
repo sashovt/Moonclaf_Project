@@ -13,6 +13,7 @@ namespace PhotoGallery
         {
             Database.SetInitializer(
                 new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+
             ConfigureAuth(app);
         }
     }

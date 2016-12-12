@@ -14,12 +14,12 @@ namespace PhotoGallery.Controllers
     public class PhotosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+       
 
         // GET: Photos/Gallery
         public ActionResult Gallery()
         {
-            ViewBag.Message = "Gallery";
+            ViewBag.Message = "Gallery";    
             using (db)
             {
                 var photos = db.Photos
@@ -27,7 +27,7 @@ namespace PhotoGallery.Controllers
                     .ToList();
 
                 return View(photos);
-            }
+            }  
         }
         public ActionResult newGallery()
         {
@@ -46,7 +46,6 @@ namespace PhotoGallery.Controllers
         public ActionResult Details(int? id)
         {
             ViewBag.Message = "Other";
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -56,7 +55,7 @@ namespace PhotoGallery.Controllers
             {
                 var photo = db.Photos
                     .Where(p => p.Id == id)
-                    .Include(p => p.Author)
+                    .Include(a => a.Author)
                     .First();
 
                 if (photo == null)
@@ -72,9 +71,8 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.Message = "PostImage";
-
-            return View();
+            var photo= new Photo();
+            return View(photo);
         }
 
         // POST: Photos/Create
@@ -83,31 +81,33 @@ namespace PhotoGallery.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
-        public ActionResult Create(Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] Photo photo,HttpPostedFileBase file)
         {
             ViewBag.Message = "PostImage";
 
-            using (db)
+            var authorId = db.Users
+                .Where(u => u.UserName == this.User.Identity.Name)
+                .First()
+                .Id;
+
+            if (file != null)
             {
-                var authorId = db.Users
-                    .Where(u => u.UserName == this.User.Identity.Name)
-                    .First()
-                    .Id;
-
-                photo.AuthorId = authorId;
-
-                db.Photos.Add(photo);
-                db.SaveChanges();
-
-                return RedirectToAction("MyGallery", "Photos");
+                photo.Image = new byte[file.ContentLength];
+                file.InputStream.Read(photo.Image, 0, file.ContentLength);
             }
+
+            photo.AuthorId = authorId;
+
+            db.Photos.Add(photo);
+            db.SaveChanges();
+
+            return RedirectToAction("MyGallery","Photos");
         }
 
         // GET: Photos/Edit/5
         [Authorize]
         public ActionResult Edit(int? id)
         {
-            ViewBag.Message = "Other";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +118,11 @@ namespace PhotoGallery.Controllers
                 var photo = db.Photos
                     .Where(p => p.Id == id)
                     .First();
+
+                if (!IsUserAuthorizedToEdit(photo))
+                {
+                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
 
                 if (photo == null)
                 {
@@ -129,8 +134,10 @@ namespace PhotoGallery.Controllers
                 model.AuthorId = photo.AuthorId;
                 model.Title = photo.Title;
                 model.Image = photo.Image;
+                DateTime currentDate = DateTime.Now;
+                model.DateAdded = currentDate;
 
-                return View(photo);
+                return View(model);
             }
         }
 
@@ -139,26 +146,21 @@ namespace PhotoGallery.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(PhotoViewModel model)
         {
-
-            ViewBag.Message = "Other";
-
-
-            using (var database = new ApplicationDbContext())
+            using (db)
             {
-                var photo = database.Photos
+                var photo = db.Photos
                     .FirstOrDefault(p => p.Id == model.Id);
 
                 photo.AuthorId = model.AuthorId;
                 photo.Title = model.Title;
-                DateTime currentDate = DateTime.Now;
-                photo.DateAdded = currentDate;
                 photo.Image = model.Image;
+                photo.DateAdded = model.DateAdded;
+                
 
-                database.Entry(photo).State = EntityState.Modified;
-                database.SaveChanges();
+                db.Entry(photo).State = EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("MyGallery", "Photos");
             }
@@ -168,7 +170,6 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Delete(int? id)
         {
-            ViewBag.Message = "Other";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -180,6 +181,11 @@ namespace PhotoGallery.Controllers
                     .Where(p => p.Id == id)
                     .Include(a => a.Author)
                     .First();
+
+                if(!IsUserAuthorizedToEdit(photo))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
 
                 if (photo == null)
                 {
@@ -193,10 +199,9 @@ namespace PhotoGallery.Controllers
         // POST: Photos/Delete/5
         [Authorize]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            if(id==null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -208,7 +213,7 @@ namespace PhotoGallery.Controllers
                     .Include(a => a.Author)
                     .First();
 
-                if(photo==null)
+                if(photo == null)
                 {
                     return HttpNotFound();
                 }
@@ -227,12 +232,12 @@ namespace PhotoGallery.Controllers
             ViewBag.Message = "MyGallery";
             return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
         }
-
+      
         public ActionResult ResultGallery(string userName)
         {
-
+            
             ViewBag.Message = "Home";
-            return View(db.Photos.Where(u => u.Author.Id == userName).ToList());
+            return View(db.Photos.Where(u => u.Author.Id == userName).ToList()); 
         }
         protected override void Dispose(bool disposing)
         {
@@ -243,10 +248,11 @@ namespace PhotoGallery.Controllers
             base.Dispose(disposing);
         }
 
-        //private bool IsUserAuthorizedToEdit(Photo photo)
-        //{
-        //bool isAuthor = photo.IsAuthor(this.User.Identity.Name);
-        //return isAuthor;
-        //}
+        public bool IsUserAuthorizedToEdit(Photo photo)
+        {
+            bool isAuthor = photo.IsAuthor(this.User.Identity.Name);
+
+            return isAuthor;
+        }
     }
 }

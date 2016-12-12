@@ -18,7 +18,7 @@
             max-height: 200px;
             width: auto;
             height: auto;
-            border-radius: 5px;
+            border-radius:5px;
         }
     </style>
     <title>Edit</title>
@@ -49,6 +49,9 @@
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.AuthorId)
+                        @Html.HiddenFor(model=>model.Image)
+                        @Html.HiddenFor(model=>model.DateAdded)
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -69,7 +72,7 @@
                                 }
                                 else
                                 {
-                                    < img src = "http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style = "width: 150px; height:100px" />
+                                    <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
                                 }
                             </div>
                         </div>
@@ -79,11 +82,11 @@
                             <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
                                 @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             </div>
+                        </div>
 
-                            <div class="form-group" style="margin-top:20px; margin-left: 18px">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Save" class="btn btn-default" />
-                                </div>
+                        <div class="form-group" style="margin-top:20px; margin-left: 18px">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>
                     </div>

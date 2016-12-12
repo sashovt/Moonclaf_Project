@@ -10,13 +10,10 @@ namespace PhotoGallery.Models
     public class Photo
     {
 
-
         public Photo()
         {
             this.DateAdded = DateTime.Now;
         }
-
-
 
         [Key]
         public int Id { get; set; }
@@ -36,5 +33,9 @@ namespace PhotoGallery.Models
 
         public virtual ApplicationUser Author { get; set; }
 
+        public bool IsAuthor(string name)
+        {
+            return this.Author.UserName.Equals(name);
+        }
     }
 }

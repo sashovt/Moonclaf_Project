@@ -8,6 +8,7 @@ namespace PhotoGallery.Models
 {
     public class PhotoViewModel
     {
+
         public int Id { get; set; }
 
         [Required]
@@ -17,8 +18,9 @@ namespace PhotoGallery.Models
         public byte[] Image { get; set; }
 
         [Required]
-        public string AuthorId { get; set; }
-
         public DateTime DateAdded { get; set; }
+
+        [Required]
+        public string AuthorId { get; set; }
     }
 }

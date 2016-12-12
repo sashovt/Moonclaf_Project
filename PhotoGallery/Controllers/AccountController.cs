@@ -394,7 +394,7 @@ namespace PhotoGallery.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-           
+            System.Diagnostics.Debug.WriteLine("LogOff action result !!");
             return RedirectToAction("Index", "Home");
         }
 

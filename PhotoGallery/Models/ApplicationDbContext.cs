@@ -8,9 +8,7 @@ namespace PhotoGallery.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public virtual IDbSet<Photo> Photos { get; set; }
-
-      
+        public DbSet<Photo> Photos { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

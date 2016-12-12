@@ -3,15 +3,10 @@
 
 <html>
 <head>
-
     <title>My Gallery</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="~/Content/main.css" />
-
-
-    <title>My Gallery</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -38,18 +33,19 @@
                         {
                             var base64 = Convert.ToBase64String(photo.Image);
                             var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
-
                             <div class="image fit">
-                                <a href="~/Photos/Details/@photo.Id"><img src="@imgsrc" alt="" /></a>
+                                <a href="#"><img src="@imgsrc" alt="" /></a>
                                 <div class="g_desc" style="margin-top:10px">
                                     <div class="g_1">
                                         <h4 class="no"><a href="#">Title: @photo.Title</a></h4>
                                         <p class="g_2"><a href="#">Date: @photo.DateAdded.Date.ToString("dd/MM/yyyy")</a></p>
                                         @Html.ActionLink("Edit", "Edit", "Photos", new { @id = photo.Id }, new { @class = "btn btn-group-sm" })
                                         @Html.ActionLink("Delete", "Delete", "Photos", new { @id = photo.Id }, new { @style = "margin-left:7px", @class = "btn btn-danger" })
-                                        </div>
                                     </div>
+                                    <span class="likes" style="margin-right:20px"><a href="#"><img src="~/Images/heart.png" title="likes" alt=""> 000</a></span>
+                                    <div class="clear"></div>
                                 </div>
+                            </div>
                            
                         }
                         else
@@ -57,6 +53,8 @@
                             <img src="http://wonkville.net/wp-content/uploads/2016/04/No-image-available.jpg" style="width: 150px; height:100px" />
                         }
                     </div>
+
+
                 }
 
             </div>

@@ -4,7 +4,7 @@
 .backgroundColor{
     background-color: #d5d5d5;
 }
-
-.detailsBackground{ 
-    background-color: #9099A2;
+.center {
+    display: block;
+    margin: 0 auto;
 }
