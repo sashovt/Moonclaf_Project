@@ -21,7 +21,8 @@ namespace PhotoGallery.Models
         [Key]
         public int Id { get; set; }
 
-        [StringLength(200)]
+        [Required]
+        [StringLength(50)]
         public string Title { get; set; }
        
         [Required]
@@ -30,7 +31,10 @@ namespace PhotoGallery.Models
         [Required]
         public DateTime DateAdded { get; set; }
 
-        public ApplicationUser Author { get; set; }
-       
+        [ForeignKey("Author")]
+        public string AuthorId { get; set; }
+
+        public virtual ApplicationUser Author { get; set; }
+
     }
 }
