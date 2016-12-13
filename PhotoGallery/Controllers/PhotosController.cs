@@ -250,9 +250,10 @@ namespace PhotoGallery.Controllers
 
         public bool IsUserAuthorizedToEdit(Photo photo)
         {
+            bool isAdmin = this.User.IsInRole("Admin");
             bool isAuthor = photo.IsAuthor(this.User.Identity.Name);
 
-            return isAuthor;
+            return isAuthor || isAdmin;
         }
     }
 }
