@@ -21,7 +21,7 @@
             border-radius: 5px;
         }
     </style>
-    <title>Edit</title>
+    <title>Admin:Edit</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -89,6 +89,12 @@
                                     @Model.Roles[i].Name
                                 </div>
                             }
+                        </div>
+
+                        <div class="form-group" style="margin-top:20px; margin-left: 18px">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Cancel", "List", "User", null, new { @class = "btn btn-default" })
+                            </div>
                         </div>
 
                         <div class="form-group" style="margin-top:20px; margin-left: 18px">

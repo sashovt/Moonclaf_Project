@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace PhotoGallery.Controllers.Admin
 {
+    [Authorize(Roles ="Admin")]
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -155,6 +156,60 @@ namespace PhotoGallery.Controllers.Admin
                 {
                     userManager.RemoveFromRole(user.Id, role.Name);
                 }
+            }
+        }
+
+        //GET: User/Delete
+        public ActionResult Delete(string id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (db)
+            {
+                var user = db.Users
+                    .Where(u => u.Id.Equals(id))
+                    .First();
+
+                if(user==null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(user);
+            }
+        }
+
+        //POST:User/Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (db)
+            {
+                var user = db.Users
+                    .Where(u => u.Id.Equals(id))
+                    .First();
+
+                var userPhotos = db.Photos
+                    .Where(a => a.Author.Id == user.Id);
+
+                foreach(var photo in userPhotos)
+                {
+                    db.Photos.Remove(photo);
+                }
+
+                db.Users.Remove(user);
+                db.SaveChanges();
+
+                return RedirectToAction("List");
             }
         }
     }
