@@ -5,12 +5,14 @@
 }
 <html>
 <head>
-    <title>Gallery : Register</title>
+
+    <title>Account: Login</title>
+
     <style type="text/css">
-        #registerBox {
-            margin-left: 35%;
+        #createBox {
+            margin-left: 30%;
             margin-right: 50%;
-            width: 600px;
+            width: 700px;
         }
     </style>
 
@@ -19,35 +21,36 @@
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <script src="~/Scripts/jquery.min.js"></script>
+    <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-    <div class="main">
+<body style="background-color:#d5d5d5">
+    <div class="main" style="background-color:#d5d5d5">
         <div class="register_account">
             <div class="wrap">
-                    <h4 class="title">Login</h4>
-                    <hr />
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id="registerBox" }))
-            {
+                <h4 class="title">Login</h4>
+                <hr />
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "createBox" }))
+                {
 
-                        @Html.AntiForgeryToken()
-
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="form-horizontal">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -35px;">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top:30px">
                             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -25px">
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left:20px">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="checkbox">
                                     @Html.CheckBoxFor(m => m.RememberMe)
@@ -55,12 +58,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left:80px; margin-top:30px">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Log in" class="btn btn-default" />
                             </div>
                         </div>
-                    }
+                    </div>
+                }
             </div>
         </div>
     </div>

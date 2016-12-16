@@ -11,32 +11,20 @@
             margin-right: 50%;
             width: 700px;
         }
-
-        img {
-            display: block;
-            max-width: 320px;
-            max-height: 200px;
-            width: auto;
-            height: auto;
-            border-radius: 5px;
-        }
     </style>
-    <title>Admin:Edit</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User: Edit</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="~/Content/main.css" />
     <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/hover_pack.js"></script>
-    <!-- Scripts -->
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/skel.min.js"></script>
-    <script src="~/Scripts/util.js"></script>
-    <script src="~/Scripts/main.js"></script>
+    <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
+
 </head>
-<body>
-    <div class="main">
+<body style="background-color:#d5d5d5">
+    <div class="main" style="background-color:#d5d5d5">
         <div class="register_account">
             <div class="wrap">
                 <h4 class="title">Edit User</h4>
@@ -58,7 +46,7 @@
 
                         <div class="form-group" style="margin-top:30px">
                             @Html.LabelFor(model => model.User.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10" style="margin-left: 150px; margin-top: -25px;">
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -35px;">
                                 @Html.EditorFor(model => model.User.FullName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.User.FullName, "", new { @class = "text-danger" })
                             </div>
@@ -66,24 +54,24 @@
 
                         <div class="form-group" style="margin-top:30px">
                             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",} })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -35px;">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", } })
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group" style="margin-top:30px">
                             @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -45px;">
                                 @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", } })
                                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @for (int i=0;i<Model.Roles.Count; i++)
+                        <div class="form-group" style="margin-left:20px">
+                            @for (int i = 0; i < Model.Roles.Count; i++)
                             {
-                                <div class="col-md-offset-4 col-md-4">
+                                <div class="col-md-offset-2 col-md-10">
                                     @Html.HiddenFor(model => model.Roles[i].Name)
                                     @Html.CheckBoxFor(model => model.Roles[i].IsSelected)
                                     @Model.Roles[i].Name
@@ -91,15 +79,10 @@
                             }
                         </div>
 
-                        <div class="form-group" style="margin-top:20px; margin-left: 18px">
+                        <div class="form-group" style="margin-top:20px;">
                             <div class="col-md-offset-2 col-md-10">
                                 @Html.ActionLink("Cancel", "List", "User", null, new { @class = "btn btn-default" })
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-top:20px; margin-left: 18px">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Save" class="btn btn-default" />
+                                <input type="submit" value="Save" class="btn btn-default" style="margin-left:20px;" />
                             </div>
                         </div>
                     </div>

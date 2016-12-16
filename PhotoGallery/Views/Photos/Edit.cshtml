@@ -21,25 +21,22 @@
             border-radius:5px;
         }
     </style>
-    <title>Edit</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Photo: Edit</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="~/Content/main.css" />
     <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/hover_pack.js"></script>
-    <!-- Scripts -->
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/skel.min.js"></script>
-    <script src="~/Scripts/util.js"></script>
-    <script src="~/Scripts/main.js"></script>
+    <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
+
 </head>
-<body>
-    <div class="main">
+<body style="background-color:#d5d5d5">
+    <div class="main" style="background-color:#d5d5d5">
         <div class="register_account">
             <div class="wrap">
-                <h4 class="title">Edit</h4>
+                <h4 class="title">Edit Photo</h4>
                 <hr />
 
                 @using (Html.BeginForm("Edit", "Photos", FormMethod.Post, new { EncType = "multipart/form-data", id = "createBox" }))
@@ -68,7 +65,7 @@
                                 {
                                     var base64 = Convert.ToBase64String(Model.Image);
                                     var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
-                                    <img src="@imgsrc" style="width: 320px; height:200px;" />
+                                    <img src="@imgsrc" alt="" />
                                 }
                                 else
                                 {
@@ -84,9 +81,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group" style="margin-top:20px; margin-left: 18px">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Save" class="btn btn-default" />
+                        <div class="form-group" style="margin-top:20px; margin-left: 20px">
+                            <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
+                               @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new {@class="btn btn-default" })
+                                <input type="submit" value="Save" class="btn btn-default" style="margin-left:20px;" />
                             </div>
                         </div>
                     </div>
@@ -94,28 +92,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <a href="#" class="info fa fa-info-circle"><span>About</span></a>
-        <div class="inner">
-            <div class="content">
-                <h3>Edit your pictures</h3>
-                <p>Here you can change the picture title. The date is automaticaly asigned.</p>
-            </div>
-            <div class="copyright">
-                <h3>Follow us</h3>
-                <ul class="icons">
-                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-                </ul>
-                &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
-            </div>
-        </div>
-    </footer>
-
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
