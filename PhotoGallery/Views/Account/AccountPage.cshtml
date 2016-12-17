@@ -1,0 +1,80 @@
+﻿@model PhotoGallery.Models.EditUserViewModel
+<html>
+<head>
+    <style type="text/css">
+        #createBox {
+            margin-left: 30%;
+            margin-right: 50%;
+            width: 700px;
+        }
+    </style>
+
+    <title>Account</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body style="background-color:#d5d5d5">
+    <div class="main" style="background-color:#d5d5d5">
+        <div class="register_account">
+            <div class="wrap">
+                <h4 class="title">@Model.User.Email account page</h4>
+                <hr />
+                @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { EncType = "multipart/form-data", id = "createBox" }))
+                {
+                    @Html.ValidationSummary()
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -19px;">
+                                @Html.LabelFor(model => model.User.Email, Model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:30px">
+                            @Html.LabelFor(model => model.User.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -19px;">
+                                @Html.DisplayFor(model => model.User.FullName, Model.User.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.User.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:30px">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -35px;">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:30px">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -45px;">
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:20px;">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" style="margin-left:20px;" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
