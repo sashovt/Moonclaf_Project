@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div class="">
+    <div>
         <div class="header-top">
             <div class="wrap">
                 <div class="logo">
@@ -26,8 +26,8 @@
                             <div class="menu_box_list">
                                 @if (Request.IsAuthenticated)
                                 {
-                                    if (User.IsInRole("Admin"))
-                                    {
+
+                                    
                                         if (ViewBag.Message == "Gallery")
                                         {
                                             using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -35,17 +35,18 @@
                                                 @Html.AntiForgeryToken()
 
                                                 <ul>
-                                                    <li class="menu">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                                     <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos",null,null)</li>
                                                     <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
                                                     <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
@@ -57,39 +58,18 @@
                                                 @Html.AntiForgeryToken()
 
                                                 <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                                     <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
                                                     <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                     <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "Contact")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                    <li><a href="~/Home/About.cshtml">About</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
@@ -101,18 +81,19 @@
                                                 @Html.AntiForgeryToken()
 
                                                 <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                                     <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
                                                     <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                     <li><a href="">Post Image</a></li>
                                                     <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
@@ -124,17 +105,18 @@
                                                 @Html.AntiForgeryToken()
 
                                                 <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
                                                     <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                     <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
                                                     <li><a href="~/Home/About.cshtml">About</a></li>
-                                                    <li><a href="~/Home/Contact.cshtml">Contact</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
@@ -147,18 +129,19 @@
                                                 @Html.AntiForgeryToken()
 
                                                 <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                                     <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
                                                     <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                     <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
                                                     <li><a href="~/Home/About.cshtml">About</a></li>
-                                                    <li><a href="~/Home/Contact.cshtml">Contact</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
@@ -169,140 +152,23 @@
                                             {
                                                 @Html.AntiForgeryToken()
                                                 <ul>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>@Html.ActionLink("Users", "List", "User")</li>
-                                                        </ul>
-                                                    </li>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li>@Html.ActionLink("Admin(" + User.Identity.Name + ")", "AdminPage", "User")</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Html.ActionLink(User.Identity.Name, "AccountPage", "Account")</li>
+                                                    }
                                                     <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                                     <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                                     <li><a href="">Post Image</a></li>
                                                     <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
                                                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
                                                 </ul>
                                             }
                                         }
                                     }
-                                    else
-                                    {
-                                        if (ViewBag.Message == "Gallery")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                    <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "PostImage")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "Contact")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                    <li><a href="~/Home/About.cshtml">About</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "About")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li><a href="">Post Image</a></li>
-                                                    <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "Home")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                    <li><a href="~/Home/About.cshtml">About</a></li>
-                                                    <li><a href="~/Home/Contact.cshtml">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-
-                                        }
-                                        else if (ViewBag.Message == "Other")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("My Gallery", "MyGallery", "Photos")</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li>@Html.ActionLink("Post Image", "Create", "Photos", null, null)</li>
-                                                    <li><a href="~/Home/About.cshtml">About</a></li>
-                                                    <li><a href="~/Home/Contact.cshtml">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                        else if (ViewBag.Message == "MyGallery")
-                                        {
-                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                            {
-                                                @Html.AntiForgeryToken()
-                                                <ul>
-                                                    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                                    <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                                    <li><a href="">Post Image</a></li>
-                                                    <li><a href="">About</a></li>
-                                                    <li><a href="">Contact</a></li>
-                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-                                                </ul>
-                                            }
-                                        }
-                                    }
-                                }
                                 else
                                 {
                                     if (ViewBag.Message == "Gallery")
@@ -312,7 +178,7 @@
                                             <li><a href="~/Account/Login">Login</a></li>
                                             <li>@Html.ActionLink("Register", "Register", "Account", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
-                                            <li><a href="">Contact</a></li>
+                                            
                                         </ul>
                                     }
                                     else if (ViewBag.Message == "Home")
@@ -322,7 +188,7 @@
                                             <li><a href="~/Account/Login">Login</a></li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
-                                            <li><a href="~/Home/Contact">Contact</a></li>
+                                            
                                         </ul>
                                     }
                                     else if (ViewBag.Message == "Other")
@@ -333,19 +199,10 @@
                                             <li><a href="~/Account/Login">Login</a></li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
-                                            <li><a href="~/Home/Contact">Contact</a></li>
+                                            
                                         </ul>
                                     }
-                                    else if (ViewBag.Message == "Contact")
-                                    {
-                                        <ul>
-                                            <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
-                                            <li><a href="~/Account/Login">Login</a></li>
-                                            <li>@Html.ActionLink("Register", "Register", "Account", null, null)</li>
-                                            <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                            <li><a href="~/Home/About">About</a></li>
-                                        </ul>
-                                    }
+                              
                                     else if (ViewBag.Message == "About")
                                     {
                                         <ul>
@@ -353,7 +210,7 @@
                                             <li><a href="~/Account/Login">Login</a></li>
                                             <li>@Html.ActionLink("Register", "Register", "Account", null, null)</li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
-                                            <li><a href="">Contact</a></li>
+                                           
                                         </ul>
                                     }
                                     else if (ViewBag.Message == "Login")
@@ -363,7 +220,7 @@
                                             <li>@Html.ActionLink("Register", "Register", "Account", null, null)</li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
-                                            <li><a href="">Contact</a></li>
+                                          
                                         </ul>
                                     }
                                     else if (ViewBag.Message == "Register")
@@ -372,18 +229,10 @@
                                             <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
                                             <li>@Html.ActionLink("Gallery", "Gallery", "Photos", null, null)</li>
                                             <li><a href="~/Home/About">About</a></li>
-                                            <li><a href="">Contact</a></li>
+                                          
                                         </ul>
                                     }
-                                    <!--
-                                         <ul>
-                                        <li><a href="~/Account/Login">Login</a></li>
-                                        <li><a href="">Gallery</a></li>
-                                        <li><a href="">About</a></li>
-                                        <li><a href="">Contact</a></li>
-                                    </ul>
-                                        -->
-
+                                  
 
                                 }
                             </div>

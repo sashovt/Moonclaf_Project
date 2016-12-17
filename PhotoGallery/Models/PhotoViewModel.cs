@@ -22,5 +22,7 @@ namespace PhotoGallery.Models
 
         [Required]
         public string AuthorId { get; set; }
+
+
     }
 }

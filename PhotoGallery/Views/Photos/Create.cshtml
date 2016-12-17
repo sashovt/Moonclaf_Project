@@ -19,9 +19,52 @@
     <script src="~/Scripts/jquery.min.js"></script>
     <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
 
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+
 </head>
-<body style="background-color:#d5d5d5">
-    <div class="main" style="background-color:#d5d5d5">
+<body style="background-color:#FFCC99">
+    <div class="main" style="background-color:#FFCC99">
         <div class="register_account">
             <div class="wrap">
 
@@ -53,7 +96,12 @@
                                 @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             </div>
                         </div>
-
+                        <div class="form-group" id="Category" style="margin-top:30px">
+                            @Html.LabelFor(model => model.CategoryId, "Category ", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
+                                @Html.DropDownListFor(model => model.CategoryId , )
+                            </div>
+                        </div>
                         <div class="form-group" style="margin-top:20px; margin-left: 20px">
                             <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
                                 <input type="submit" value="Upload" class="btn btn-default" />

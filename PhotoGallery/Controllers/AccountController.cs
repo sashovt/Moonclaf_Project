@@ -3,12 +3,14 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PhotoGallery.Models;
+using System.Data.Entity;
 
 namespace PhotoGallery.Controllers
 {
@@ -388,6 +390,63 @@ namespace PhotoGallery.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        //GET: Account/AccountPage
+        public ActionResult AccountPage()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Users
+                    .Where(u => u.Email == User.Identity.Name)
+                    .First();
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var viewModel = new EditUserViewModel();
+                viewModel.User = user;
+               // viewModel.Roles = GetUserRoles(user, db);
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(string id, EditUserViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Email == id);
+
+                    if (user == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    if (!string.IsNullOrEmpty(viewModel.Password))
+                    {
+                        var hasher = new PasswordHasher();
+                        var passwordHash = hasher.HashPassword(viewModel.Password);
+                        user.PasswordHash = passwordHash;
+                    }
+
+                    user.Email = viewModel.User.Email;
+                    user.FullName = viewModel.User.FullName;
+                    user.UserName = viewModel.User.Email;
+                    //this.SetUserRoles(viewModel, user, db);
+
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("List");
+                }
+            }
+            return View(viewModel);
         }
 
         //

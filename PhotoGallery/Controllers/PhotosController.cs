@@ -71,8 +71,14 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var photo= new Photo();
-            return View(photo);
+            var photo= new UploadPhotoViewModel();
+            using (db)
+            {
+                var Categories = db.Categories.ToList();
+                //photo.Categories = Categories;
+                return View(photo);
+            }
+             
         }
 
         // POST: Photos/Create
@@ -97,9 +103,17 @@ namespace PhotoGallery.Controllers
             }
 
             photo.AuthorId = authorId;
-
+            
             db.Photos.Add(photo);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.InnerException.ToString());
+            }
+          
 
             return RedirectToAction("MyGallery","Photos");
         }
