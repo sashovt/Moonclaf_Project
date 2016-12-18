@@ -25,7 +25,8 @@
             <div class="wrap">
                 <h4 class="title">@Model.User.Email account page</h4>
                 <br/>
-                @Html.ActionLink("Go to list","List","User",null,new { @class= "btn-sm btn-warning"})
+                @Html.ActionLink("Go to Users list","List","User",null,new { @class= "btn-sm btn-warning"})
+                @Html.ActionLink("Go to Categories list", "List", "Categories", null, new { @class = "btn-sm btn-warning" })
                 <hr />
 
                 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { EncType = "multipart/form-data", id = "createBox" }))

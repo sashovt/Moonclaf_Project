@@ -81,7 +81,7 @@ namespace PhotoGallery.Controllers.Admin
             using (db)
             {
                 var user = db.Users
-                    .Where(u => u.Email == id)
+                    .Where(u => u.Id == id)
                     .First();
 
                 if (user == null)

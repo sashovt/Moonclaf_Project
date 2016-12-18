@@ -81,6 +81,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group" id="Category" style="margin-top:30px">
+                            @Html.LabelFor(model => model.CategoryId, "Category ", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10" style="margin-left: 150px; margin-top: -20px;">
+                                @Html.DropDownListFor(model => model.CategoryId,
+                               new SelectList(Model.Categories, "Id", "Name"),
+                               new { @class = "btn btn-info col-sm-12" })
+                            </div>
+                        </div>
+
                         <div class="form-group" style="margin-top:20px; margin-left: 20px">
                             <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
                                @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new {@class="btn btn-default" })

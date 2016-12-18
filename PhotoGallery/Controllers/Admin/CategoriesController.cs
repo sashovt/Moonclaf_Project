@@ -16,7 +16,7 @@ namespace PhotoGallery.Controllers.Admin
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult List()
         {
             return View(db.Categories.ToList());
         }
@@ -38,7 +38,7 @@ namespace PhotoGallery.Controllers.Admin
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             return View(category);
@@ -70,7 +70,7 @@ namespace PhotoGallery.Controllers.Admin
             {
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(category);
         }
@@ -83,23 +83,44 @@ namespace PhotoGallery.Controllers.Admin
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }
-             Category category = db.Categories.Find(id);
-             if (category == null)
-             {
-                 return HttpNotFound();
-             }
-            return View(category);
+
+            using (db)
+            {
+                var category = db.Categories
+                    .FirstOrDefault(c => c.Id == id);
+
+                if (category == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(category);
+            }
         }
 
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            using (db)
+            {
+                var category = db.Categories
+                    .FirstOrDefault(c => c.Id == id);
+
+                var categoryPhotos = category.Photos
+                    .ToList();
+
+                foreach(var photo in categoryPhotos)
+                {
+                    db.Photos.Remove(photo);
+                }
+
+                db.Categories.Remove(category);
+                db.SaveChanges();
+
+                return RedirectToAction("List");
+            }
         }
 
         protected override void Dispose(bool disposing)

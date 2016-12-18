@@ -146,6 +146,10 @@ namespace PhotoGallery.Controllers
                 model.Image = photo.Image;
                 DateTime currentDate = DateTime.Now;
                 model.DateAdded = currentDate;
+                model.CategoryId = photo.CategoryId;
+                model.Categories = db.Categories
+                    .OrderBy(c => c.Name)
+                    .ToList();
 
                 return View(model);
             }
@@ -167,6 +171,7 @@ namespace PhotoGallery.Controllers
                 photo.Title = model.Title;
                 photo.Image = model.Image;
                 photo.DateAdded = model.DateAdded;
+                photo.CategoryId = model.CategoryId;
                 
 
                 db.Entry(photo).State = EntityState.Modified;
@@ -249,6 +254,28 @@ namespace PhotoGallery.Controllers
             ViewBag.Message = "Home";
             return View(db.Photos.Where(u => u.Author.Id == userName).ToList()); 
         }
+
+
+        //GET:Photos/GategoryGallery/5
+        public ActionResult CategoryGallery(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var db = new ApplicationDbContext())
+            {
+                var photos = db.Photos
+                    .Where(p => p.CategoryId == id)
+                    .Include(a => a.Author)
+                    .ToList();
+
+                return View(photos);
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

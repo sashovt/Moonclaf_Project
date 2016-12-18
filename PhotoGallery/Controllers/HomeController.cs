@@ -1,7 +1,9 @@
 ﻿using PhotoGallery.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,9 +15,9 @@ namespace PhotoGallery.Controllers
         {
             var db = new ApplicationDbContext();
             var photo = db.Photos.OrderByDescending(p => p.DateAdded).Take(3);
-            
+            var categories = db.Categories.OrderBy(c => c.Name);
             ViewBag.Message = "Home";
-            return View();
+            return View(categories);
         }
         public ActionResult About()
         {
@@ -51,6 +53,5 @@ namespace PhotoGallery.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
     }
 }
