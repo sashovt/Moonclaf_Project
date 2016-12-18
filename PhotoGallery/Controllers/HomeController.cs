@@ -16,23 +16,21 @@ namespace PhotoGallery.Controllers
             var db = new ApplicationDbContext();
             var photo = db.Photos.OrderByDescending(p => p.DateAdded).Take(3);
             var categories = db.Categories.OrderBy(c => c.Name);
-            ViewBag.Message = "Home";
+
+
             return View(categories);
         }
         public ActionResult About()
         {
-            ViewBag.Message = "About";
             return View();
         }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Contact";
             return View();
         }
         [HttpPost]
         public ActionResult Search(string title_user)
         {
-            ViewBag.Message = "Home";
             using (var database = new ApplicationDbContext())
             {
                 var photo = database.Photos

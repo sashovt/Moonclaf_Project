@@ -19,7 +19,6 @@ namespace PhotoGallery.Controllers
         // GET: Photos/Gallery
         public ActionResult Gallery()
         {
-            ViewBag.Message = "Gallery";    
             using (db)
             {
                 var photos = db.Photos
@@ -31,8 +30,6 @@ namespace PhotoGallery.Controllers
         }
         public ActionResult newGallery()
         {
-
-            ViewBag.Message = "Gallery";
             using (db)
             {
                 var photos = db.Photos
@@ -45,7 +42,6 @@ namespace PhotoGallery.Controllers
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {
-            ViewBag.Message = "Other";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,7 +88,6 @@ namespace PhotoGallery.Controllers
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] PhotoViewModel photo,HttpPostedFileBase file)
         {
-            ViewBag.Message = "PostImage";
 
             var authorId = db.Users
                 .Where(u => u.UserName == this.User.Identity.Name)
@@ -244,14 +239,12 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult MyGallery()
         {
-            ViewBag.Message = "MyGallery";
             return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
         }
       
         public ActionResult ResultGallery(string userName)
         {
             
-            ViewBag.Message = "Home";
             return View(db.Photos.Where(u => u.Author.Id == userName).ToList()); 
         }
 
