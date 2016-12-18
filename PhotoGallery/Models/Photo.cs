@@ -12,7 +12,16 @@ namespace PhotoGallery.Models
 
         public Photo()
         {
-            this.DateAdded = DateTime.Now;
+        }
+
+        public Photo(string authorId,string title, byte[] image,int categoryId,DateTime dateAdded)
+        {
+            this.AuthorId = authorId;
+            this.Title = title;
+            this.Image = image;
+            this.CategoryId = categoryId;
+            this.DateAdded = dateAdded;
+
         }
 
         [Key]
@@ -37,6 +46,7 @@ namespace PhotoGallery.Models
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
         public bool IsAuthor(string name)
         {
             return this.Author.UserName.Equals(name);

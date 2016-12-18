@@ -10,12 +10,15 @@ namespace PhotoGallery.Models
     public class Category
     {
         private ICollection<Photo> photos;
+
         public Category()
         {
             this.photos = new HashSet<Photo>();
         }
+
         [Key]
         public int Id { get; set; }
+
         [Required]
         [Index(IsUnique = true)]
         [StringLength(50)]

@@ -71,11 +71,14 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var photo= new UploadPhotoViewModel();
+            
             using (db)
             {
-                var Categories = db.Categories.ToList();
-                //photo.Categories = Categories;
+                var photo = new PhotoViewModel();
+                photo.Categories = db.Categories
+                    .OrderBy(c=>c.Name)
+                    .ToList();
+                
                 return View(photo);
             }
              
@@ -87,7 +90,7 @@ namespace PhotoGallery.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] Photo photo,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] PhotoViewModel photo,HttpPostedFileBase file)
         {
             ViewBag.Message = "PostImage";
 
@@ -102,17 +105,10 @@ namespace PhotoGallery.Controllers
                 file.InputStream.Read(photo.Image, 0, file.ContentLength);
             }
 
-            photo.AuthorId = authorId;
-            
-            db.Photos.Add(photo);
-            try
-            {
-                db.SaveChanges();
-            }
-            catch(Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.InnerException.ToString());
-            }
+            var image = new Photo(authorId, photo.Title, photo.Image, photo.CategoryId,photo.DateAdded);
+    
+            db.Photos.Add(image);
+            db.SaveChanges();
           
 
             return RedirectToAction("MyGallery","Photos");
