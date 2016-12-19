@@ -26,6 +26,8 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <script src="~/Scripts/jquery.min.js"></script>
     <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body style="background-color:#d5d5d5">
@@ -34,7 +36,7 @@
             <div class="wrap">
                 <h4 class="title">Delete</h4>
                 <hr />
-                <h3>Are you sure you want to delete this photo?</h3>
+                <h4>Are you sure you want to delete this photo?</h4>
 
                 @using (Html.BeginForm("Delete", "Photos", FormMethod.Post, new { EncType = "multipart/form-data", id = "createBox" }))
                 {
@@ -76,7 +78,7 @@
 
                         <div class="form-group" style="margin-top:20px; margin-left: 20px">
                             <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
-                                @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new { @class = "btn btn-group-sm" })
                                 <input type="submit" value="Delete" class="btn btn-danger" style="margin-left:20px;"/>
                             </div>
                         </div>

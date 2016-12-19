@@ -25,6 +25,7 @@
 </head>
 <body class="backgroundColor">
     <div class="backgroundColor" style="padding:10px">
+        <div>@Html.ActionLink("<< back","Gallery", "Photos",null, new {@class="btn", @style= "margin-bottom:10px; background-color:#a9b4ce" })</div>
         @if (Model.Image != null)
             {
                 var base64 = Convert.ToBase64String(Model.Image);

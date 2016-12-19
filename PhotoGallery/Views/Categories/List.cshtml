@@ -25,7 +25,10 @@
     <div class="container">
         <div class="well">
             <h2 class="title">Categories</h2>
-            @Html.ActionLink("Create", "Create", "Categories", null, new { @class = "btn btn-warning", @style = "margin-right: 10px;" })
+            <div>@Html.ActionLink("<< back", "AdminPage", "User", null, new { @class = "btn btn-warning" })
+                 @Html.ActionLink("Create", "Create", "Categories", null, new { @class = "btn btn-warning", @style="margin-left:10px" })
+            </div>
+           
 
             <table class="table table-striped table-hover">
                 <thead>
