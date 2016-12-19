@@ -29,20 +29,27 @@ namespace PhotoGallery.Controllers
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Search(string title_user)
         {
             using (var database = new ApplicationDbContext())
             {
                 var photo = database.Photos
                     .FirstOrDefault(p => p.Title == title_user);
-                if(photo==null)
+                if (photo == null)
                 {
-                    photo = database.Photos.FirstOrDefault(p => p.Author.FullName == title_user);
-                    if (photo != null)
+                    try
                     {
-                       return  RedirectToAction("ResultGallery","Photos", new { photo.AuthorId } );
+                        var authorId = database.Photos.First(p => p.Author.FullName == title_user).Author.Id;
+
+                        if (authorId != null)
+                        {
+
+                            return RedirectToAction("ResultGallery", "Photos", new { @id = authorId });
+                        }
                     }
-                   
+                    catch { }
+
                 }
                 if (photo != null)
                 {

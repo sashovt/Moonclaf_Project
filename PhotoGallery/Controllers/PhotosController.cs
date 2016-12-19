@@ -14,7 +14,7 @@ namespace PhotoGallery.Controllers
     public class PhotosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
 
         // GET: Photos/Gallery
         public ActionResult Gallery()
@@ -26,19 +26,9 @@ namespace PhotoGallery.Controllers
                     .ToList();
 
                 return View(photos);
-            }  
-        }
-        public ActionResult newGallery()
-        {
-            using (db)
-            {
-                var photos = db.Photos
-                    .Include(a => a.Author)
-                    .ToList();
-
-                return View(photos);
             }
         }
+
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {
@@ -52,6 +42,7 @@ namespace PhotoGallery.Controllers
                 var photo = db.Photos
                     .Where(p => p.Id == id)
                     .Include(a => a.Author)
+                    .Include(c => c.Category)
                     .First();
 
                 if (photo == null)
@@ -67,17 +58,18 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            
+
             using (db)
             {
                 var photo = new PhotoViewModel();
                 photo.Categories = db.Categories
-                    .OrderBy(c=>c.Name)
+
+                    .OrderBy(c => c.Name)
                     .ToList();
-                
+
                 return View(photo);
             }
-             
+
         }
 
         // POST: Photos/Create
@@ -86,7 +78,7 @@ namespace PhotoGallery.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Title,DateAdded")] PhotoViewModel photo,HttpPostedFileBase file)
+        public ActionResult Create(PhotoViewModel photo, HttpPostedFileBase file)
         {
 
             var authorId = db.Users
@@ -100,13 +92,13 @@ namespace PhotoGallery.Controllers
                 file.InputStream.Read(photo.Image, 0, file.ContentLength);
             }
 
-            var image = new Photo(authorId, photo.Title, photo.Image, photo.CategoryId,photo.DateAdded);
-    
+            var image = new Photo(authorId, photo.Title, photo.Image, photo.CategoryId, photo.DateAdded);
+
             db.Photos.Add(image);
             db.SaveChanges();
-          
 
-            return RedirectToAction("MyGallery","Photos");
+
+            return RedirectToAction("MyGallery", "Photos");
         }
 
         // GET: Photos/Edit/5
@@ -126,7 +118,7 @@ namespace PhotoGallery.Controllers
 
                 if (!IsUserAuthorizedToEdit(photo))
                 {
-                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
 
                 if (photo == null)
@@ -167,7 +159,7 @@ namespace PhotoGallery.Controllers
                 photo.Image = model.Image;
                 photo.DateAdded = model.DateAdded;
                 photo.CategoryId = model.CategoryId;
-                
+
 
                 db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
@@ -192,7 +184,7 @@ namespace PhotoGallery.Controllers
                     .Include(a => a.Author)
                     .First();
 
-                if(!IsUserAuthorizedToEdit(photo))
+                if (!IsUserAuthorizedToEdit(photo))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
@@ -211,7 +203,7 @@ namespace PhotoGallery.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -223,7 +215,7 @@ namespace PhotoGallery.Controllers
                     .Include(a => a.Author)
                     .First();
 
-                if(photo == null)
+                if (photo == null)
                 {
                     return HttpNotFound();
                 }
@@ -241,11 +233,26 @@ namespace PhotoGallery.Controllers
         {
             return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
         }
-      
-        public ActionResult ResultGallery(string userName)
+        [AllowAnonymous]
+        public ActionResult ResultGallery(string id)
         {
-            
-            return View(db.Photos.Where(u => u.Author.Id == userName).ToList()); 
+            using (db)
+            {
+                try
+                {
+                    var photos = db.Photos
+                   .Where(a => a.Author.Id == id)
+                   .ToList();
+                    ViewBag.User = db.Photos.FirstOrDefault(a => a.Author.Id == id).Author.FullName;
+                    return View(photos);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+
+            }
         }
 
 
@@ -263,7 +270,7 @@ namespace PhotoGallery.Controllers
                     .Where(p => p.CategoryId == id)
                     .Include(a => a.Author)
                     .ToList();
-
+                ViewBag.Category = db.Categories.FirstOrDefault(c => c.Id == id).Name; 
                 return View(photos);
             }
         }

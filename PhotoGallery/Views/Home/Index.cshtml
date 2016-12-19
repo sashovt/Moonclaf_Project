@@ -16,8 +16,34 @@
     <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
 
+    <style>
+        .ulNew {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color:#6d7993;
+        }
+
+        .liNew {
+            float: left;
+        }
+
+            .liNew a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+                .liNew a:hover {
+                   background:rgba(150, 133, 143,0.51);
+                }
+    </style>
+
 </head>
-<body style="background-color:#d5d5d5">
+<body style="background-color: #d5d5d5;">
 
     <div class="index-banner" style="background-image:url(../../Images/Cute-Camera-Wallpaper.jpg)">
         <div class="wmuSlider example1">
@@ -48,26 +74,21 @@
         </script>
     </div>
 
-    <div class="main" style="background-color:#d5d5d5">
-        <div class="content-bottom">
-            <h2 class="m_2">Browse by Category</h2>
-            <div class="wrap">
-                <div class="section group">
-                    <div class="col_1_of_5 span_1_of_5">
-                        <ul class="list1">
-
-                                    @foreach (var category in Model)
-                                    {
-                                        <li>
-                                            @Html.ActionLink(@category.Name, "CategoryGallery", "Photos", new { @id = category.Id }, null)
-                                        </li>
-                                    }
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+    <div class="main"  style="background-color: #d5d5d5;" >
+       
+            <div style="padding:10px">
+                <ul class="ulNew">
+                    <li class ="liNew" style="text-transform:uppercase"><a>Browse by category ></a></li>
+                    @foreach (var category in Model)
+                    {
+                        <li class="liNew">
+                            @Html.ActionLink(@category.Name, "CategoryGallery", "Photos", new { @id = category.Id }, null)
+                        </li>
+                    }
+                </ul>
+                <div class="clear"></div>
             </div>
-        </div>
+       
     </div>
 
 

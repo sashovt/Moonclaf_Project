@@ -19,7 +19,7 @@
 </head>
 <body class="backgroundColor">
 
-    
+
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -34,8 +34,8 @@
                             var base64 = Convert.ToBase64String(photo.Image);
                             var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
                             <div class="image fit">
-                                <a href="#"><img src="@imgsrc" alt="" /></a>
-                                <div class="g_desc" style="margin-top:10px">
+                                <a href="~/Photos/Details/@photo.Id"><img src="@imgsrc" alt="" /></a>
+                                <div class="g_desc" style="margin-top:20px">
                                     <div class="g_1">
                                         <h4 class="no"><a href="#">Title: @photo.Title</a></h4>
                                         <p class="g_2"><a href="#">Date: @photo.DateAdded.Date.ToString("dd/MM/yyyy")</a></p>
@@ -49,7 +49,8 @@
                                     <div class="clear"></div>
                                 </div>
                             </div>
-                           
+
+
                         }
                         else
                         {
