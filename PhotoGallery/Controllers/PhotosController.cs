@@ -185,6 +185,8 @@ namespace PhotoGallery.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            ViewBag.cancel = back.cancel;
+
             using (db)
             {
                 var photo = db.Photos
@@ -252,6 +254,7 @@ namespace PhotoGallery.Controllers
                 try
                 {
                     back.backIndex = 4;
+                    back.cancel = 4;
                     var photo = new GalleryViewModel(db.Photos.Where(a => a.Author.Id == id).ToList(), db.Categories.OrderBy(c => c.Name).ToList());
                     ViewBag.User = db.Photos.FirstOrDefault(a => a.Author.Id == id).Author.FullName;
 

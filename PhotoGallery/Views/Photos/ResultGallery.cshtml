@@ -107,6 +107,22 @@
                             var imgsrc = string.Format("data:file/gif;base64,{0}", base64);
                             <div class="image fit">
                                 <a href="~/Photos/Details/@photo.Id"><img src="@imgsrc" alt="" /></a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="g_desc" style="margin-top:10px">
+                                        <div class="g_1">
+                                            <h4 class="no"><a href="#">Title: @photo.Title</a></h4>
+                                            <p class="g_2"><a href="#">Date: @photo.DateAdded.Date.ToString("dd/MM/yyyy")</a></p>
+                                        </div>
+                                        <div class="g_desc" style="margin-top:7px;">
+                                            <div class="g_1" style="margin-left:30px">
+                                                @Html.ActionLink("Edit", "Edit", "Photos", new { @id = photo.Id }, new { @class = "btn btn-group-sm" })
+                                                @Html.ActionLink("Delete", "Delete", "Photos", new { @id = photo.Id }, new { @style = "margin-left:7px", @class = "btn btn-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                }
                             </div>
                         }
                         else
@@ -128,15 +144,15 @@
         <div class="inner">
             <div class="content">
                 <h3>This is @ViewBag.User 's personal gallery .</h3>
-                <p>Here you can browse this user's uploads.Click on an image if you want to see more details.</p>
+                <p>Here you can browse this user's uploads. Click on an image if you want to see more details.</p>
             </div>
             <div class="copyright">
                 <h3>Follow us</h3>
                 <ul class="icons">
-                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                    <li><a href="https://twitter.com/" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.instagram.com/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://dribbble.com/" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
                 </ul>
                 &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
             </div>

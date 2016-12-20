@@ -36,11 +36,11 @@
             }
             else if (ViewBag.backIndex == 3)
             {
-                @Html.ActionLink("<< back", "CategoryGallery", "Photos", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+                @Html.ActionLink("<< back", "CategoryGallery", "Photos", new { @id=Model.CategoryId }, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
             }
             else if (ViewBag.backIndex == 4)
             {
-                @Html.ActionLink("<< back", "ResultGallery", "Photos", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+                @Html.ActionLink("<< back", "ResultGallery", "Photos", new { @id=Model.AuthorId }, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
             }
             else if (ViewBag.backIndex == 5)
             {

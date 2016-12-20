@@ -15,7 +15,7 @@
             max-height: 200px;
             width: auto;
             height: auto;
-            border-radius:5px;
+            border-radius: 5px;
         }
     </style>
 
@@ -101,7 +101,11 @@
                                 }
                                 else if (ViewBag.cancel == 3)
                                 {
-                                    @Html.ActionLink("Cancel", "CategoryGallery", "Photos", new {@id=Model.CategoryId }, new { @class = "btn btn-group-sm" })
+                                    @Html.ActionLink("Cancel", "CategoryGallery", "Photos", new { @id = Model.CategoryId }, new { @class = "btn btn-group-sm" })
+                                }
+                                else if (ViewBag.cancel == 4)
+                                {
+                                    @Html.ActionLink("Cancel", "ResultGallery", "Photos", new { @id = Model.AuthorId }, new { @class = "btn btn-group-sm" })
                                 }
                                 else
                                 {

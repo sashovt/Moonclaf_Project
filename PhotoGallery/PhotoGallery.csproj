@@ -234,6 +234,7 @@
     <Content Include="Images\881aad6b9722688fc8c054ec7a52df71.jpg" />
     <Content Include="Images\970383a9550852fec1a5b0e159d2996c.jpg" />
     <Content Include="Images\admin.png" />
+    <Content Include="Images\Alex.jpg" />
     <Content Include="Images\author.png" />
     <Content Include="Images\b-arrow.png" />
     <Content Include="Images\banner.jpg" />
@@ -250,6 +251,8 @@
     <Content Include="Images\p_close.png" />
     <Content Include="Images\quotes.png" />
     <Content Include="Images\search.png" />
+    <Content Include="Images\Teo.jpg" />
+    <Content Include="Images\Vick.jpg" />
     <Content Include="Images\zoom.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

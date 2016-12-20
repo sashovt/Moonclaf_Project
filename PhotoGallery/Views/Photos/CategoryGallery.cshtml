@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Gallery</title>
+    <title>@ViewBag.Category category</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -75,7 +75,7 @@
             <div class="content">
                 <h1>Moonclaf</h1>
                 <h2>
-                    @ViewBag.Category gallery.
+                    @ViewBag.Category category.
                 </h2>
                 <a href="#" class="button big alt"><span>Explore</span></a>
             </div>
@@ -140,16 +140,16 @@
         <a href="#" class="info fa fa-info-circle"><span>About</span></a>
         <div class="inner">
             <div class="content">
-                <h3>The whole gallery.</h3>
-                <p>Here you can browse all user uploads.Click on an image if you want to see more details.</p>
+                <h3>@ViewBag.Category cateogry.</h3>
+                <p>Here you can browse all uploads in current cateogry. Click on an image if you want to see more details.</p>
             </div>
             <div class="copyright">
                 <h3>Follow us</h3>
                 <ul class="icons">
-                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                    <li><a href="https://twitter.com/" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.instagram.com/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://dribbble.com/" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
                 </ul>
                 &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
             </div>
