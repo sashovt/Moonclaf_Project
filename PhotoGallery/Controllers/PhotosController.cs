@@ -28,11 +28,8 @@ namespace PhotoGallery.Controllers
             back.cancel = 1;
             using (db)
             {
-                var photos = db.Photos
-                    .Include(a => a.Author)
-                    .ToList();
-
-                return View(photos);
+                var photo = new GalleryViewModel(db.Photos.Include(a => a.Author).ToList(), db.Categories.OrderBy(c => c.Name).ToList());
+                return View(photo);
             }
         }
 
@@ -244,7 +241,8 @@ namespace PhotoGallery.Controllers
         {
             back.backIndex = 2;
             back.cancel = 2;
-            return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
+            var photo = new GalleryViewModel(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList(), db.Categories.OrderBy(c => c.Name).ToList());
+            return View(photo);
         }
         [AllowAnonymous]
         public ActionResult ResultGallery(string id)
@@ -254,11 +252,10 @@ namespace PhotoGallery.Controllers
                 try
                 {
                     back.backIndex = 4;
-                    var photos = db.Photos
-                   .Where(a => a.Author.Id == id)
-                   .ToList();
+                    var photo = new GalleryViewModel(db.Photos.Where(a => a.Author.Id == id).ToList(), db.Categories.OrderBy(c => c.Name).ToList());
                     ViewBag.User = db.Photos.FirstOrDefault(a => a.Author.Id == id).Author.FullName;
-                    return View(photos);
+
+                    return View(photo);
                 }
                 catch
                 {
@@ -282,12 +279,10 @@ namespace PhotoGallery.Controllers
 
             using (var db = new ApplicationDbContext())
             {
-                var photos = db.Photos
-                    .Where(p => p.CategoryId == id)
-                    .Include(a => a.Author)
-                    .ToList();
-                ViewBag.Category = db.Categories.FirstOrDefault(c => c.Id == id).Name; 
-                return View(photos);
+                var photo = new GalleryViewModel(db.Photos.Where(c => c.CategoryId == id).ToList(), db.Categories.OrderBy(c => c.Name).ToList());
+                ViewBag.Category = db.Categories.FirstOrDefault(c => c.Id == id).Name;
+                return View(photo);
+               
             }
         }
 

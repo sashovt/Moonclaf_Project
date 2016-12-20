@@ -210,6 +210,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\GalleryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoViewModel.cs" />
@@ -229,6 +230,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\3b3a5d02e55ae190e43756809231f1d7.jpg" />
+    <Content Include="Images\881aad6b9722688fc8c054ec7a52df71.jpg" />
+    <Content Include="Images\970383a9550852fec1a5b0e159d2996c.jpg" />
     <Content Include="Images\admin.png" />
     <Content Include="Images\author.png" />
     <Content Include="Images\b-arrow.png" />

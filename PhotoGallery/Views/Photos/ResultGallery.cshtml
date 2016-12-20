@@ -1,9 +1,9 @@
-﻿@model IEnumerable<PhotoGallery.Models.Photo>
+﻿@model PhotoGallery.Models.GalleryViewModel
 <!DOCTYPE HTML>
 
 <html>
 <head>
-    <title>Gallery</title>
+    <title>Search result</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -14,7 +14,57 @@
     <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/HelperStyle.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #6d7993;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: rgb(150, 133, 143);
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: rgb(150, 133, 143);
+        }
+    </style>
+
 </head>
 <body class="backgroundColor">
 
@@ -32,12 +82,23 @@
         </div>
     </header>
 
+    <div class="dropdown" style="z-index:1000;   margin-left: 28px; margin-top:18px; ">
+        <button class="dropbtn">Categories</button>
+        <div class="dropdown-content">
+            @foreach (var category in Model.category)
+            {
+                @Html.ActionLink(@category.Name, "CategoryGallery", "Photos", new { @id = category.Id }, null)
+            }
+        </div>
+    </div>
+
+
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <div class="columns">
 
-                @foreach (var photo in Model)
+                @foreach (var photo in Model.photo)
                 {
                     <div>
                         @if (photo.Image != null)
@@ -62,24 +123,24 @@
     </div>
 
     <!-- Footer -->
-    footer id="footer">
-    <a href="#" class="info fa fa-info-circle"><span>About</span></a>
-    <div class="inner">
-        <div class="content">
-            <h3>This is @ViewBag.User 's personal gallery .</h3>
-            <p>Here you can browse this user's uploads.Click on an image if you want to see more details.</p>
+    <footer id="footer">
+        <a href="#" class="info fa fa-info-circle"><span>About</span></a>
+        <div class="inner">
+            <div class="content">
+                <h3>This is @ViewBag.User 's personal gallery .</h3>
+                <p>Here you can browse this user's uploads.Click on an image if you want to see more details.</p>
+            </div>
+            <div class="copyright">
+                <h3>Follow us</h3>
+                <ul class="icons">
+                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                </ul>
+                &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
+            </div>
         </div>
-        <div class="copyright">
-            <h3>Follow us</h3>
-            <ul class="icons">
-                <li><a href="https://twitter.com/" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                <li><a href="https://www.instagram.com/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="https://dribbble.com/" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-            </ul>
-            &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
-        </div>
-    </div>
     </footer>
 
     <!-- Scripts -->
