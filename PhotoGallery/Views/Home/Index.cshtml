@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color:#6d7993;
+            background-color: #6d7993;
         }
 
         .liNew {
@@ -38,7 +38,7 @@
             }
 
                 .liNew a:hover {
-                   background:rgba(150, 133, 143,0.51);
+                    background: rgba(150, 133, 143,0.51);
                 }
     </style>
 
@@ -74,21 +74,20 @@
         </script>
     </div>
 
-    <div class="main"  style="background-color: #d5d5d5;" >
-       
-            <div style="padding:10px">
-                <ul class="ulNew">
-                    <li class ="liNew" style="text-transform:uppercase"><a>Browse by category ></a></li>
-                    @foreach (var category in Model)
-                    {
-                        <li class="liNew">
-                            @Html.ActionLink(@category.Name, "CategoryGallery", "Photos", new { @id = category.Id }, null)
-                        </li>
-                    }
-                </ul>
-                <div class="clear"></div>
-            </div>
-       
+    <div class="main" style="background-color: #d5d5d5;">
+
+        <div style="padding:10px">
+            <ul class="ulNew">
+                <li class="liNew" style="text-transform:uppercase"><a>Browse by category ></a></li>
+                @foreach (var category in Model)
+                {
+                    <li class="liNew">
+                        @Html.ActionLink(@category.Name, "CategoryGallery", "Photos", new { @id = category.Id }, null)
+                    </li>
+                }
+            </ul>
+            <div class="clear"></div>
+        </div>
     </div>
 
 

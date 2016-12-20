@@ -13,6 +13,7 @@ namespace PhotoGallery.Controllers
     {
         public ActionResult Index()
         {
+            back.backIndex = 5;
             var db = new ApplicationDbContext();
             var photo = db.Photos.OrderByDescending(p => p.DateAdded).Take(3);
             var categories = db.Categories.OrderBy(c => c.Name);

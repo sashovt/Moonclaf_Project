@@ -91,7 +91,23 @@
 
                         <div class="form-group" style="margin-top:20px; margin-left: 20px">
                             <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
-                               @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new {@class="btn btn-group-sm" })
+                                @if (ViewBag.cancel == 1)
+                                {
+                                    @Html.ActionLink("Cancel", "Gallery", "Photos", null, new { @class = "btn btn-group-sm" })
+                                }
+                                else if (ViewBag.cancel == 2)
+                                {
+                                    @Html.ActionLink("Cancel", "MyGallery", "Photos", null, new { @class = "btn btn-group-sm" })
+                                }
+                                else if (ViewBag.cancel == 3)
+                                {
+                                    @Html.ActionLink("Cancel", "CategoryGallery", "Photos", new {@id=Model.CategoryId }, new { @class = "btn btn-group-sm" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Cancel", "Index", "Home", new { @id = Model.CategoryId }, new { @class = "btn btn-group-sm" })
+                                }
+
                                 <input type="submit" value="Save" class="btn btn-warning" style="margin-left:20px;" />
                             </div>
                         </div>

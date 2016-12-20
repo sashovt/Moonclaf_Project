@@ -11,14 +11,21 @@ using System.Drawing;
 using System.IO;
 namespace PhotoGallery.Controllers
 {
+    public static class back
+    {
+        public static int backIndex { get; set; }
+
+        public static int cancel { get; set; }
+    }
     public class PhotosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-
+        
         // GET: Photos/Gallery
         public ActionResult Gallery()
-        {
+        { 
+            back.backIndex = 1;
+            back.cancel = 1;
             using (db)
             {
                 var photos = db.Photos
@@ -36,6 +43,8 @@ namespace PhotoGallery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            ViewBag.backIndex = back.backIndex;
 
             using (db)
             {
@@ -109,6 +118,8 @@ namespace PhotoGallery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            ViewBag.cancel= back.cancel;
 
             using (db)
             {
@@ -231,6 +242,8 @@ namespace PhotoGallery.Controllers
         [Authorize]
         public ActionResult MyGallery()
         {
+            back.backIndex = 2;
+            back.cancel = 2;
             return View(db.Photos.Where(u => u.Author.Email == User.Identity.Name).ToList());
         }
         [AllowAnonymous]
@@ -240,6 +253,7 @@ namespace PhotoGallery.Controllers
             {
                 try
                 {
+                    back.backIndex = 4;
                     var photos = db.Photos
                    .Where(a => a.Author.Id == id)
                    .ToList();
@@ -259,6 +273,8 @@ namespace PhotoGallery.Controllers
         //GET:Photos/GategoryGallery/5
         public ActionResult CategoryGallery(int? id)
         {
+            back.backIndex = 3;
+            back.cancel = 3;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -25,7 +25,29 @@
 </head>
 <body class="backgroundColor">
     <div class="backgroundColor" style="padding:10px">
-        <div>@Html.ActionLink("<< back","Gallery", "Photos",null, new {@class="btn", @style= "margin-bottom:10px; background-color:#a9b4ce" })</div>
+        <div>
+            @if (ViewBag.backIndex == 1)
+            {
+                @Html.ActionLink("<< back", "Gallery", "Photos", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+            }
+            else if (ViewBag.backIndex==2)
+            {
+                @Html.ActionLink("<< back","MyGallery", "Photos", null, new { @class="btn", @style= "margin-bottom:10px; background-color:#a9b4ce" })
+            }
+            else if (ViewBag.backIndex == 3)
+            {
+                @Html.ActionLink("<< back", "CategoryGallery", "Photos", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+            }
+            else if (ViewBag.backIndex == 4)
+            {
+                @Html.ActionLink("<< back", "ResultGallery", "Photos", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+            }
+            else if (ViewBag.backIndex == 5)
+            {
+                @Html.ActionLink("<< back", "Index", "Home", null, new { @class = "btn", @style = "margin-bottom:10px; background-color:#a9b4ce" })
+            }
+        </div>
+        
         @if (Model.Image != null)
             {
                 var base64 = Convert.ToBase64String(Model.Image);

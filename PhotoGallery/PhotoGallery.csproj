@@ -245,9 +245,7 @@
     <Content Include="Images\nav_icon.png" />
     <Content Include="Images\p_close.png" />
     <Content Include="Images\quotes.png" />
-    <Content Include="Images\Sasho.jpg" />
     <Content Include="Images\search.png" />
-    <Content Include="Images\Vick.jpg" />
     <Content Include="Images\zoom.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
